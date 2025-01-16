@@ -5,28 +5,30 @@ using System.Collections.Generic;
 public class SquareAdjacents : MonoBehaviour
 {
 
-    List<Square> squares = new List<Square>();
+    private List<Square> squares = new List<Square>();
     [SerializeField] private GameObject[] squaresObjects;
 
     public List<Square> Squares { get => squares; set => squares = value; }
 
+    // Inicializa la lista de Squares desde el array de GameObjects
     private void InitializeSquares()
     {
-        foreach (GameObject squareObject in squaresObjects)
-        {
-            Square square = squareObject.GetComponent<Square>();
+        squares.Clear();
 
+        foreach (GameObject obj in squaresObjects)
+        {
+            Square square = obj.GetComponent<Square>();
             if (square != null)
             {
                 squares.Add(square);
             }
             else
             {
-                Debug.LogWarning($"El GameObject {squareObject.name} no tiene un componente Square.");
+                Debug.LogWarning($"El GameObject {obj.name} no tiene un componente Square.");
             }
         }
 
-        Debug.Log($"Se inicializó la lista con {squares.Count} elementos.");
+        Debug.Log($"Inicializados {squares.Count} cuadrados.");
     }
 
 
