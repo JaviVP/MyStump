@@ -11,9 +11,6 @@ public class Square : MonoBehaviour
 
     public GameObject SquareObject { get => squareObject; set => squareObject = value; }
 
-
-
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
