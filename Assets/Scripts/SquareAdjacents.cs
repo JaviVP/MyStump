@@ -21,6 +21,8 @@ public class SquareAdjacents : MonoBehaviour
             if (square != null)
             {
                 squares.Add(square);
+                // Asignar la referencia de SquareAdjacents a cada Square
+                //square.SquareAdjacents = this;
             }
             else
             {
@@ -31,6 +33,16 @@ public class SquareAdjacents : MonoBehaviour
         Debug.Log($"Inicializados {squares.Count} cuadrados.");
     }
 
+    public void HighlightAllAdjacents(Color color)
+    {
+        foreach (GameObject obj in squaresObjects)
+        {
+            if (obj != null)
+            {
+                obj.GetComponent<MeshRenderer>().material.color = color;
+            }
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -10,6 +10,21 @@ public class Board : MonoBehaviour
     private List <Square> myBoard = new List<Square> ();
     [SerializeField] private GameObject orderSquare;
     private GameObject orderSquareClon;
+    public static Board Instance { get; private set; }
+    private void Awake()
+    {
+        // If there is an instance, and it's not me, delete myself.
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,8 +40,26 @@ public class Board : MonoBehaviour
             orderSquareClon.transform.localPosition = new Vector3 (0, 0.256f, 0);
             orderSquareClon.transform.localRotation = Quaternion.Euler(90, -100.411f, -10.576f);
             orderSquareClon.GetComponent<TMP_Text>().text = "" + i;
+            myBoard.Add(sq);
         }
 
+    }
+
+    public void EnableSquareCollider(bool state)
+    {
+        for (int i = 0; i < this.gameObject.transform.childCount; i++)
+        {
+            myBoard[i].SquareObject.GetComponent<MeshCollider>().enabled = state;
+        }
+    }
+
+    public void StateSquareColor()
+    {
+        for (int i = 0; i < this.gameObject.transform.childCount; i++)
+        {
+            myBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color= Color.white;
+
+        }
     }
 
     // Update is called once per frame
