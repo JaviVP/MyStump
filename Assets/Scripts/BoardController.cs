@@ -4,13 +4,26 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using TMPro;
 
-public class Board : MonoBehaviour
+public class BoardController : MonoBehaviour
 {
+
+    public enum SquareState
+    {
+        Empty,
+        Ant,
+        Termite,
+        Wood,
+        TermiteWall
+    }
+
+    public Color[] playersColor;
+
+
 
     private List <Square> myBoard = new List<Square> ();
     [SerializeField] private GameObject orderSquare;
     private GameObject orderSquareClon;
-    public static Board Instance { get; private set; }
+    public static BoardController Instance { get; private set; }
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.
@@ -53,7 +66,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    public void StateSquareColor()
+    public void ResetStateSquareColor()
     {
         for (int i = 0; i < this.gameObject.transform.childCount; i++)
         {
