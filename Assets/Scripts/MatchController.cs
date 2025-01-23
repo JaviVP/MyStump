@@ -33,7 +33,7 @@ public class MatchController : MonoBehaviour
     }
     void Start()
     {
-
+        turn = 1;
         /*typePlayer = TypeOfPlayers.Termite;
         Debug.Log(typePlayer.ToString()+ " -- " + (int) typePlayer);
         typePlayer = (TypeOfPlayers) 1;

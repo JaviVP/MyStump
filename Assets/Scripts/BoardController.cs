@@ -58,6 +58,7 @@ public class BoardController : MonoBehaviour
         {
             Square sq = new Square();
             sq.SquareObject = this.gameObject.transform.GetChild(i).gameObject;
+            sq.State = this.gameObject.transform.GetChild(i).GetComponent<Square>().State;
             orderSquare.SetActive(true);
             orderSquareClon = (GameObject)Instantiate(orderSquare);
             orderSquareClon.transform.SetParent(transform.GetChild(i).gameObject.transform);
@@ -78,10 +79,26 @@ public class BoardController : MonoBehaviour
 
     public void ResetStateSquareColor()
     {
+        Debug.Log("Reseteamos");
         for (int i = 0; i < this.gameObject.transform.childCount; i++)
         {
             myBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color= Color.white;
+            Debug.Log("Estadooo"+ myBoard[i].State);
+            if (myBoard[i].State == BoardController.SquareState.NoWakable)
+            {
+               
+                myBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.NoWakable]; ;
+                myBoard[i].SquareObject.GetComponent<MeshCollider>().enabled= false;
+            }
+            else if  (myBoard[i].State == BoardController.SquareState.Wood)
+            {
 
+                myBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Wood]; ;
+            }
+            else if (myBoard[i].State == BoardController.SquareState.TermiteWall)
+            {
+                myBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.TermiteWall]; ;
+            }
         }
     }
 

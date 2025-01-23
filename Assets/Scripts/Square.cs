@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Drawing;
 
 public class Square : MonoBehaviour
 {
@@ -19,39 +20,46 @@ public class Square : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
 
         //Volver al color anterior
-       
+
 
         //Poner de un color el clicado y otro color los adjacentes.
         //HighlightSquare();
         //Crear un método en la clase board que pongar todos los square a white(estado normal).
-        
-        if (State== BoardController.SquareState.Ant)
-        {
-            GetComponent<MeshRenderer>().material.color = Color.red;
-        }
-        else if (State == BoardController.SquareState.Termite)
-        {
-            GetComponent<MeshRenderer>().material.color = Color.yellow;
-        }
-        else if (State == BoardController.SquareState.NoWakable)
-        {
-            GetComponent<MeshRenderer>().material.color = Color.black;
-        }
-        else if (State == BoardController.SquareState.Wood)
-        {
-            GetComponent<MeshRenderer>().material.color = Color.cyan;
-        }
-        else if (State == BoardController.SquareState.TermiteWall)
-        {
-            GetComponent<MeshRenderer>().material.color = Color.blue;
-        }
-        else
-        {
-            GetComponent<MeshRenderer>().material.color = Color.white;
-        }
+        ChangeColorSquare(this.gameObject);
+
 
 
     }
+
+    public void ChangeColorSquare(GameObject obj)
+    {
+
+        if (obj.GetComponent<Square>().State == BoardController.SquareState.Empty)
+        {
+            obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Empty];
+        }
+        else if (obj.GetComponent<Square>().State == BoardController.SquareState.NoWakable)
+        {
+            obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.NoWakable];
+        }
+        else if (obj.GetComponent<Square>().State == BoardController.SquareState.Ant)
+        {
+            obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Ant];
+        }
+        else if (obj.GetComponent<Square>().State == BoardController.SquareState.Termite)
+        {
+            obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Termite];
+        }
+        else if (obj.GetComponent<Square>().State == BoardController.SquareState.Wood)
+        {
+            obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Wood];
+        }
+        else if (obj.GetComponent<Square>().State == BoardController.SquareState.TermiteWall)
+        {
+            obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.TermiteWall];
+        }
+    }
+
 
     private void HighlightSquare()
     {
@@ -61,8 +69,8 @@ public class Square : MonoBehaviour
         //squareAdjacents.HighlightAllAdjacents(Color.yellow);
         if (meshRenderer != null)
         {
-            meshRenderer.material.color = Color.red;
-            GetComponent<SquareAdjacents>().HighlightAllAdjacents(Color.green);
+            GetComponent<MeshRenderer>().material.color = BoardController.Instance.PlayersColor[MatchController.Instance.Turn];
+            GetComponent<SquareAdjacents>().HighlightAllAdjacents();
         }
         else
         {

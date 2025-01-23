@@ -596,7 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93325f9a09a98e4bb892cdaeb103813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
+  state: 4
 --- !u!64 &35384937
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1016,7 +1016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93325f9a09a98e4bb892cdaeb103813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
+  state: 1
 --- !u!64 &53025753
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1077,7 +1077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93325f9a09a98e4bb892cdaeb103813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
 --- !u!64 &57783113
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3179,7 +3179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93325f9a09a98e4bb892cdaeb103813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
+  state: 3
 --- !u!64 &315667503
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3378,7 +3378,7 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 0}
   - {r: 1, g: 0.88976, b: 0, a: 0}
   statesColor:
-  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 0.18813777, g: 1, b: 0, a: 0}
   - {r: 1, g: 0, b: 0, a: 0}
   - {r: 1, g: 0.79446304, b: 0, a: 0}
   - {r: 0.8018868, g: 0.29657, b: 0.10969208, a: 0}
@@ -18196,7 +18196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93325f9a09a98e4bb892cdaeb103813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
+  state: 5
 --- !u!64 &2027880696
 MeshCollider:
   m_ObjectHideFlags: 0

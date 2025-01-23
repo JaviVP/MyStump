@@ -33,7 +33,7 @@ public class SquareAdjacents : MonoBehaviour
         //Debug.Log($"Inicializados {squares.Count} cuadrados.");
     }
 
-    public void HighlightAllAdjacents(Color color)
+    public void HighlightAllAdjacents()
     {
         foreach (GameObject obj in squaresObjects)
         {
@@ -42,12 +42,29 @@ public class SquareAdjacents : MonoBehaviour
                 //Check state square
                 if (obj.GetComponent<Square>().State == BoardController.SquareState.Empty)
                 {
-                    obj.GetComponent<MeshRenderer>().material.color = color;
+                    obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Empty];
                 }
-                if (obj.GetComponent<Square>().State == BoardController.SquareState.NoWakable)
+                else if (obj.GetComponent<Square>().State == BoardController.SquareState.NoWakable)
                 {
-                    obj.GetComponent<MeshRenderer>().material.color = color;
+                    obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int) BoardController.SquareState.NoWakable];
                 }
+                else if (obj.GetComponent<Square>().State == BoardController.SquareState.Ant)
+                {
+                    obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Ant];
+                }
+                else if (obj.GetComponent<Square>().State == BoardController.SquareState.Termite)
+                {
+                    obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Termite];
+                }
+                else if (obj.GetComponent<Square>().State == BoardController.SquareState.Wood)
+                {
+                    obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Wood];
+                }
+                else if (obj.GetComponent<Square>().State == BoardController.SquareState.TermiteWall)
+                {
+                    obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.TermiteWall];
+                }
+                
             }
         
         }
