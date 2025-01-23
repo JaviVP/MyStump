@@ -7,7 +7,15 @@ public class MatchController : MonoBehaviour
         Termite,
         Ant
     }
+    public enum TypeofTroppes
+    {
+        AntSoldier,
+        AntWorker,
+        TermiteSoldier,
+        TermiteWorker
+    }
     private TypeOfPlayers typePlayerTurn;
+    private TypeofTroppes typeTroppes;
     private int turn = 0;
     private int actionsPerTurn = 3;
     private int numPlayers = 2;
