@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class MatchController : MonoBehaviour
 {
-
+    public enum TypeOfPlayers
+    {
+        Termite,
+        Ant
+    }
+    private TypeOfPlayers typePlayerTurn;
     private int turn = 0;
     private int actionsPerTurn = 3;
     private int numPlayers = 2;
@@ -26,12 +31,21 @@ public class MatchController : MonoBehaviour
             Instance = this;
         }
     }
+    void Start()
+    {
+
+        /*typePlayer = TypeOfPlayers.Termite;
+        Debug.Log(typePlayer.ToString()+ " -- " + (int) typePlayer);
+        typePlayer = (TypeOfPlayers) 1;
+        Debug.Log(typePlayer.ToString() + " -- " + (int)typePlayer);*/
+    }
     public void ChangeTurn()
     {
         turn++;
         if (turn>=numPlayers)
         {
             turn = 0;
+            typePlayerTurn = (TypeOfPlayers) turn;
         }
 
 

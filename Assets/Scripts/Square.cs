@@ -10,6 +10,7 @@ public class Square : MonoBehaviour
     [SerializeField]
     private BoardController.SquareState state;
     public GameObject SquareObject { get => squareObject; set => squareObject = value; }
+    public BoardController.SquareState State { get => state; set => state = value; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,17 +19,43 @@ public class Square : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
 
         //Volver al color anterior
-        GetComponent<MeshRenderer>().material.color = Color.white;
+       
 
         //Poner de un color el clicado y otro color los adjacentes.
         //HighlightSquare();
         //Crear un método en la clase board que pongar todos los square a white(estado normal).
         
+        if (State== BoardController.SquareState.Ant)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.red;
+        }
+        else if (State == BoardController.SquareState.Termite)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.yellow;
+        }
+        else if (State == BoardController.SquareState.NoWakable)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.black;
+        }
+        else if (State == BoardController.SquareState.Wood)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.cyan;
+        }
+        else if (State == BoardController.SquareState.TermiteWall)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.blue;
+        }
+        else
+        {
+            GetComponent<MeshRenderer>().material.color = Color.white;
+        }
+
 
     }
 
     private void HighlightSquare()
     {
+
         BoardController.Instance.ResetStateSquareColor();
         // Cambiar color de las casillas adyacentes
         //squareAdjacents.HighlightAllAdjacents(Color.yellow);

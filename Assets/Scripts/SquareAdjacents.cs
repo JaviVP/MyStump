@@ -30,7 +30,7 @@ public class SquareAdjacents : MonoBehaviour
             }
         }
 
-        Debug.Log($"Inicializados {squares.Count} cuadrados.");
+        //Debug.Log($"Inicializados {squares.Count} cuadrados.");
     }
 
     public void HighlightAllAdjacents(Color color)
@@ -39,8 +39,17 @@ public class SquareAdjacents : MonoBehaviour
         {
             if (obj != null)
             {
-                obj.GetComponent<MeshRenderer>().material.color = color;
+                //Check state square
+                if (obj.GetComponent<Square>().State == BoardController.SquareState.Empty)
+                {
+                    obj.GetComponent<MeshRenderer>().material.color = color;
+                }
+                if (obj.GetComponent<Square>().State == BoardController.SquareState.NoWakable)
+                {
+                    obj.GetComponent<MeshRenderer>().material.color = color;
+                }
             }
+        
         }
     }
 
