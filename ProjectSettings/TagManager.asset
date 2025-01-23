@@ -6,6 +6,8 @@ TagManager:
   tags:
   - square
   - orderSquare
+  - Ant
+  - Termite
   layers:
   - Default
   - TransparentFX

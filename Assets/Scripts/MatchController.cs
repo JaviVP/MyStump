@@ -45,9 +45,9 @@ public class MatchController : MonoBehaviour
         if (turn>=numPlayers)
         {
             turn = 0;
-            typePlayerTurn = (TypeOfPlayers) turn;
+           
         }
-
+        typePlayerTurn = (TypeOfPlayers)turn;
 
 
     }
