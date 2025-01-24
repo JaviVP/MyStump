@@ -56,6 +56,7 @@ public class MatchController : MonoBehaviour
            
         }
         typePlayerTurn = (TypeOfPlayers)turn;
+        BoardController.Instance.MarkFactionsTurn();
 
 
     }

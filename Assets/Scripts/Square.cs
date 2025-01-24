@@ -4,14 +4,19 @@ using System.Drawing;
 
 public class Square : MonoBehaviour
 {
+    
     private int id;
     private GameObject squareObject;
     private List<Square> squareAdjacents;
     private MeshRenderer meshRenderer;
+
+    private FactionAbstract faction;
     [SerializeField]
     private BoardController.SquareState state;
     public GameObject SquareObject { get => squareObject; set => squareObject = value; }
     public BoardController.SquareState State { get => state; set => state = value; }
+    public FactionAbstract Faction { get => faction; set => faction = value; }
+    public int Id { get => id; set => id = value; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,6 +45,7 @@ public class Square : MonoBehaviour
         }
         else if (obj.GetComponent<Square>().State == BoardController.SquareState.NoWakable)
         {
+            obj.GetComponent<MeshRenderer>().enabled = false;
             obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.NoWakable];
         }
         else if (obj.GetComponent<Square>().State == BoardController.SquareState.Ant)

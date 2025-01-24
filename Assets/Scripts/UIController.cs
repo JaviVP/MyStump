@@ -5,6 +5,8 @@ public class UIController : MonoBehaviour
 
     public static UIController Instance { get; private set; }
 
+    
+
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.
@@ -17,6 +19,11 @@ public class UIController : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    public void EndTurnButton()
+    {
+        MatchController.Instance.ChangeTurn();
     }
     // Update is called once per frame
     void Update()
