@@ -1,8 +1,9 @@
-using NUnit.Framework;
+
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using TMPro;
+
 
 public class BoardController : MonoBehaviour
 {
@@ -29,11 +30,16 @@ public class BoardController : MonoBehaviour
 
 
     private List <Square> myBoard = new List<Square> ();
+
+    private int squareSelected=-1;
+
     [SerializeField] private GameObject orderSquare;
     private GameObject orderSquareClon;
     public static BoardController Instance { get; private set; }
     public Color[] PlayersColor { get => playersColor; set => playersColor = value; }
     public Color[] StatesColor { get => statesColor; set => statesColor = value; }
+    public int SquareSelected { get => squareSelected; set => squareSelected = value; }
+    public List<Square> MyBoard { get => myBoard; set => myBoard = value; }
 
     private void Awake()
     {
@@ -54,13 +60,16 @@ public class BoardController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+       
         AssignObjectsSquare();
-
         Invoke("InitialFactions", 0.1f);
+
        
 
     }
-    
+    /// <summary>
+    /// Define the initial faction positions
+    /// </summary>
     public void InitialFactions()
     {
        // int randomPoint = Random.Range(0, this.gameObject.transform.childCount);
@@ -77,8 +86,9 @@ public class BoardController : MonoBehaviour
                 antG.Type = MatchController.TypeOfPlayers.Ant;
                 antG.objectFaction = (GameObject)Instantiate(antObject, initialListAnts[i].transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                 //  initialListAnts[i].Faction = antG;
-                antG.objectFaction.transform.SetParent(myBoard[initialListAnts[i].Id].SquareObject.transform);
-                myBoard[initialListAnts[i].Id].Faction = antG;
+                antG.objectFaction.transform.SetParent(MyBoard[initialListAnts[i].Id].SquareObject.transform);
+                MyBoard[initialListAnts[i].Id].Faction = antG;
+                MyBoard[initialListAnts[i].Id].SquareObject.GetComponent<Square>().Faction = antG;
 
             }
 
@@ -98,9 +108,10 @@ public class BoardController : MonoBehaviour
                 termiteG.Type = MatchController.TypeOfPlayers.Termite;
                 termiteG.objectFaction = (GameObject)Instantiate(termiteObject, initialListTermites[i].transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                 // initialListTermites[i].Faction = termiteG;
-                termiteG.objectFaction.transform.SetParent(myBoard[initialListAnts[i].Id].SquareObject.transform);
-                Debug.Log(initialListTermites[i].Id);
-                myBoard[initialListTermites[i].Id].Faction = termiteG;
+                termiteG.objectFaction.transform.SetParent(MyBoard[initialListAnts[i].Id].SquareObject.transform);
+                
+                MyBoard[initialListTermites[i].Id].Faction = termiteG;
+                MyBoard[initialListAnts[i].Id].SquareObject.GetComponent<Square>().Faction = termiteG;
             }
 
         }
@@ -109,9 +120,32 @@ public class BoardController : MonoBehaviour
             Debug.Log("There aren't any termite assigned");
         }
         MarkFactionsTurn();
-
+        UpdateTraces();
 
     }
+    public void UpdateTraces()
+    {
+        string trace = "";
+        UIController.Instance.ResetAllTraces();
+        for (int i = 0; i < this.gameObject.transform.childCount; i++)
+        {
+            
+                trace = MyBoard[i].Id.ToString() + ") St: " + MyBoard[i].State;
+                if (MyBoard[i].Faction != null)
+                {
+                    trace += " #F:" + MyBoard[i].Faction.Type.ToString().Substring(0, 3) + "- S:" + MyBoard[i].Faction.QuantitySoldier + " T:" + MyBoard[i].Faction.QuantityWorker;
+                    UIController.Instance.WriteTrace(trace);
+                }
+                
+
+            
+
+        }
+    }
+
+    /// <summary>
+    /// Initial assignation of squares
+    /// </summary>
     public void AssignObjectsSquare()
     {
         for (int i = 0; i < this.gameObject.transform.childCount; i++)
@@ -127,29 +161,34 @@ public class BoardController : MonoBehaviour
             orderSquareClon.transform.localPosition = new Vector3(0, 0.256f, 0);
             orderSquareClon.transform.localRotation = Quaternion.Euler(90, -100.411f, -10.576f);
             orderSquareClon.GetComponent<TMP_Text>().text = "" + i;
-            myBoard.Add(sq);
+            MyBoard.Add(sq);
         }
     }
-
+    /// <summary>
+    /// Enabled or disabled all squares in the board
+    /// </summary>
+    /// <param name="state"></param>
     public void EnableSquareCollider(bool state)
     {
         for (int i = 0; i < this.gameObject.transform.childCount; i++)
         {
-            myBoard[i].SquareObject.GetComponent<MeshCollider>().enabled = state;
+            MyBoard[i].SquareObject.GetComponent<MeshCollider>().enabled = state;
         }
     }
 
     public void MarkFactionsTurn()
     {
-        for (int i = 0; i < myBoard.Count; i++)
+        EnableSquareCollider(false);
+        for (int i = 0; i < MyBoard.Count; i++)
         {
-            if (myBoard[i].Faction != null)
+            if (MyBoard[i].Faction != null)
             {
-                myBoard[i].Faction.objectFaction.transform.GetChild(0).gameObject.SetActive(false);
+                MyBoard[i].Faction.objectFaction.transform.GetChild(0).gameObject.SetActive(false);
+                
             }
             else
             {
-                Debug.Log("Null");
+                //Debug.Log("Null");
             }
         }
 
@@ -160,51 +199,58 @@ public class BoardController : MonoBehaviour
 
 
 
-            Debug.Log("Ant turn");
-            for (int i = 0; i < myBoard.Count; i++)
+            //Debug.Log("Ant turn");
+            for (int i = 0; i < MyBoard.Count; i++)
             {
-                if (myBoard[i].Faction != null && myBoard[i].Faction.Type== MatchController.TypeOfPlayers.Ant)
+                if (MyBoard[i].Faction != null && MyBoard[i].Faction.Type== MatchController.TypeOfPlayers.Ant)
                 {
-                    myBoard[i].Faction.objectFaction.transform.GetChild(0).gameObject.SetActive(true);
+                    MyBoard[i].State= SquareState.Ant;
+                    MyBoard[i].SquareObject.GetComponent<Square>().State= SquareState.Ant;
+                    MyBoard[i].Faction.objectFaction.transform.GetChild(0).gameObject.SetActive(true);
+                    MyBoard[i].SquareObject.GetComponent<MeshCollider>().enabled = true;
                 }
 
             }
         }
         else if (MatchController.Instance.Turn == (int)MatchController.TypeOfPlayers.Termite)
         {
-            for (int i = 0; i < myBoard.Count; i++)
+            for (int i = 0; i < MyBoard.Count; i++)
             {
-                if (myBoard[i].Faction != null && myBoard[i].Faction.Type == MatchController.TypeOfPlayers.Termite)
+                if (MyBoard[i].Faction != null && MyBoard[i].Faction.Type == MatchController.TypeOfPlayers.Termite)
                 {
-                    myBoard[i].Faction.objectFaction.transform.GetChild(0).gameObject.SetActive(true);
+                    MyBoard[i].State = SquareState.Termite;
+                    MyBoard[i].SquareObject.GetComponent<Square>().State = SquareState.Termite;
+                    MyBoard[i].Faction.objectFaction.transform.GetChild(0).gameObject.SetActive(true);
+                    MyBoard[i].SquareObject.GetComponent<MeshCollider>().enabled = true;
                 }
 
             }
         }
+        UpdateTraces();
     }
 
     public void ResetStateSquareColor()
     {
-        Debug.Log("Reseteamos");
+        //Debug.Log("Reseteamos");
         for (int i = 0; i < this.gameObject.transform.childCount; i++)
         {
-            myBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color= Color.white;
-            Debug.Log("Estadooo"+ myBoard[i].State);
-            if (myBoard[i].State == BoardController.SquareState.NoWakable)
+            MyBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color= Color.white;
+            //Debug.Log("Estadooo"+ myBoard[i].State);
+            if (MyBoard[i].State == BoardController.SquareState.NoWakable)
             {
                
-                myBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.NoWakable]; ;
-                myBoard[i].SquareObject.GetComponent<MeshCollider>().enabled= false;
-                myBoard[i].SquareObject.GetComponent<MeshRenderer>().enabled= false;
+                MyBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.NoWakable]; ;
+                MyBoard[i].SquareObject.GetComponent<MeshCollider>().enabled= false;
+                MyBoard[i].SquareObject.GetComponent<MeshRenderer>().enabled= false;
             }
-            else if  (myBoard[i].State == BoardController.SquareState.Wood)
+            else if  (MyBoard[i].State == BoardController.SquareState.Wood)
             {
 
-                myBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Wood]; ;
+                MyBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Wood]; ;
             }
-            else if (myBoard[i].State == BoardController.SquareState.TermiteWall)
+            else if (MyBoard[i].State == BoardController.SquareState.TermiteWall)
             {
-                myBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.TermiteWall]; ;
+                MyBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.TermiteWall]; ;
             }
         }
     }

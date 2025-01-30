@@ -66,23 +66,125 @@ public class Square : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// List of Actions
+    /// </summary>
     private void HighlightSquare()
     {
+        if (GetComponent<Square>().State == BoardController.SquareState.Ant && BoardController.Instance.SquareSelected == -1)
+        {
+                Debug.Log("Posicion: "+ this.id);
+                BoardController.Instance.SquareSelected = this.id;
+                Debug.Log("Soy una hormiga");
+                BoardController.Instance.ResetStateSquareColor();
+                // Cambiar color de las casillas adyacentes
+                //squareAdjacents.HighlightAllAdjacents(Color.yellow);
+                if (meshRenderer != null)
+                {
+                    GetComponent<MeshRenderer>().material.color = BoardController.Instance.PlayersColor[MatchController.Instance.Turn];
+                    GetComponent<SquareAdjacents>().HighlightAllAdjacents();
+                }
+                else
+                {
+                    Debug.LogError($"El MeshRenderer no está asignado en la casilla {gameObject.name}");
+                    return;
+                }
+            
 
-        BoardController.Instance.ResetStateSquareColor();
-        // Cambiar color de las casillas adyacentes
-        //squareAdjacents.HighlightAllAdjacents(Color.yellow);
-        if (meshRenderer != null)
-        {
-            GetComponent<MeshRenderer>().material.color = BoardController.Instance.PlayersColor[MatchController.Instance.Turn];
-            GetComponent<SquareAdjacents>().HighlightAllAdjacents();
+
+
         }
-        else
+        else if (GetComponent<Square>().State == BoardController.SquareState.Termite && BoardController.Instance.SquareSelected ==-1)
         {
-            Debug.LogError($"El MeshRenderer no está asignado en la casilla {gameObject.name}");
-            return;
+            Debug.Log("Posicion: " + this.id);
+            BoardController.Instance.SquareSelected = this.id;
+            Debug.Log("Soy una Termite");
+            BoardController.Instance.ResetStateSquareColor();
+            // Cambiar color de las casillas adyacentes
+            //squareAdjacents.HighlightAllAdjacents(Color.yellow);
+            if (meshRenderer != null)
+            {
+                GetComponent<MeshRenderer>().material.color = BoardController.Instance.PlayersColor[MatchController.Instance.Turn];
+                GetComponent<SquareAdjacents>().HighlightAllAdjacents();
+            }
+            else
+            {
+                Debug.LogError($"El MeshRenderer no está asignado en la casilla {gameObject.name}");
+                return;
+            }
         }
+        else 
+        {
+            //Moving
+            if (GetComponent<Square>().State == BoardController.SquareState.Empty)
+            {
+                Debug.Log("Moving a empty square");
+
+
+                
+                BoardController.Instance.MyBoard[this.id].Faction=BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction;
+                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction = null;
+                BoardController.Instance.MyBoard[this.id].Faction.objectFaction.transform.position= BoardController.Instance.MyBoard[this.id].SquareObject.transform.position + new Vector3(0, 1, 0);
+
+                //Current turn
+                if (MatchController.Instance.Turn == (int)MatchController.TypeOfPlayers.Termite)
+                {
+                    BoardController.Instance.MyBoard[this.id].state = BoardController.SquareState.Termite;
+                }
+                else if (MatchController.Instance.Turn == (int)MatchController.TypeOfPlayers.Ant)
+                {
+                    BoardController.Instance.MyBoard[this.id].state = BoardController.SquareState.Ant;
+                }
+
+                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].state = BoardController.SquareState.Empty;
+                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].squareObject.GetComponent<Square>().state = BoardController.SquareState.Empty;
+                //Moved and deselected
+                BoardController.Instance.SquareSelected = -1;
+                BoardController.Instance.ResetStateSquareColor();
+                BoardController.Instance.MarkFactionsTurn();
+
+
+
+
+            }
+            //Group
+            else if (GetComponent<Square>().State == BoardController.SquareState.Ant)
+            {
+                
+                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction = null;
+                BoardController.Instance.MyBoard[this.id].Faction.objectFaction.transform.position = BoardController.Instance.MyBoard[this.id].SquareObject.transform.position + new Vector3(0, 1, 0);
+
+                //Current turn
+                if (MatchController.Instance.Turn == (int)MatchController.TypeOfPlayers.Termite)
+                {
+                    BoardController.Instance.MyBoard[this.id].state = BoardController.SquareState.Termite;
+                }
+                else if (MatchController.Instance.Turn == (int)MatchController.TypeOfPlayers.Ant)
+                {
+                    BoardController.Instance.MyBoard[this.id].state = BoardController.SquareState.Ant;
+                }
+
+                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].state = BoardController.SquareState.Empty;
+                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].squareObject.GetComponent<Square>().state = BoardController.SquareState.Empty;
+                //Moved and deselected
+                BoardController.Instance.SquareSelected = -1;
+                BoardController.Instance.ResetStateSquareColor();
+                BoardController.Instance.MarkFactionsTurn();
+
+
+            }
+            //Attack
+            else if (GetComponent<Square>().State == BoardController.SquareState.Termite)
+            {
+                Debug.Log("Attacking");
+            }
+            else
+            {
+                Debug.Log("Otra casilla: " + GetComponent<Square>().State);
+            }
+               
+        }
+        
     }
 
     private void OnMouseDown()

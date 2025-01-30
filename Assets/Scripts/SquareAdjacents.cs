@@ -64,7 +64,10 @@ public class SquareAdjacents : MonoBehaviour
                 {
                     obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.TermiteWall];
                 }
-                
+
+                obj.GetComponent<MeshCollider>().enabled = true;
+
+
             }
         
         }
