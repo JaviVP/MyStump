@@ -107,7 +107,16 @@ public class UIController : MonoBehaviour
         panelMovement.transform.GetChild(2).GetChild(0).gameObject.SetActive(false);
         panelMovement.transform.GetChild(2).GetChild(0).gameObject.SetActive(false);
         ActivatePanelMovement(false);
-        BoardController.Instance.CreateFactionInEmptySquare(BoardController.Instance.LastClickedSquare, MatchController.TypeOfPlayers.Ant, 2, 2);
+        MatchController.TypeOfPlayers type;
+        if ((int) MatchController.TypeOfPlayers.Ant==  MatchController.Instance.Turn)
+        {
+            type = MatchController.TypeOfPlayers.Ant;
+        }
+        else
+        {
+            type = MatchController.TypeOfPlayers.Termite;
+        }
+        BoardController.Instance.CreateFactionInEmptySquare(BoardController.Instance.LastClickedSquare, type, 2, 2);
     }
 
     // Update is called once per frame
