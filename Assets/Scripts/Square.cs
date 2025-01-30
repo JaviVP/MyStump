@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Drawing;
+using UnityEngine.UIElements;
 
 public class Square : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Square : MonoBehaviour
     private GameObject squareObject;
     private List<Square> squareAdjacents;
     private MeshRenderer meshRenderer;
-
+    private int clics;
     private FactionAbstract faction;
     [SerializeField]
     private BoardController.SquareState state;
@@ -17,10 +18,12 @@ public class Square : MonoBehaviour
     public BoardController.SquareState State { get => state; set => state = value; }
     public FactionAbstract Faction { get => faction; set => faction = value; }
     public int Id { get => id; set => id = value; }
+    public int Clics { get => clics; set => clics = value; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        clics = 0;
         //Cambiar de color el objeto
         meshRenderer = GetComponent<MeshRenderer>();
 
@@ -66,11 +69,39 @@ public class Square : MonoBehaviour
         }
     }
 
+
+    public void MovingFaction()
+    {
+        BoardController.Instance.MyBoard[this.id].Faction = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction;
+        BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction = null;
+        BoardController.Instance.MyBoard[this.id].Faction.objectFaction.transform.position = BoardController.Instance.MyBoard[this.id].SquareObject.transform.position + new Vector3(0, 1, 0);
+
+        //Current turn
+        if (MatchController.Instance.Turn == (int)MatchController.TypeOfPlayers.Termite)
+        {
+            BoardController.Instance.MyBoard[this.id].state = BoardController.SquareState.Termite;
+        }
+        else if (MatchController.Instance.Turn == (int)MatchController.TypeOfPlayers.Ant)
+        {
+            BoardController.Instance.MyBoard[this.id].state = BoardController.SquareState.Ant;
+        }
+
+        BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].state = BoardController.SquareState.Empty;
+        BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].squareObject.GetComponent<Square>().state = BoardController.SquareState.Empty;
+        //Moved and deselected
+        BoardController.Instance.SquareSelected = -1;
+        BoardController.Instance.ResetStateSquareColor();
+        BoardController.Instance.MarkFactionsTurn();
+    }
     /// <summary>
     /// List of Actions
     /// </summary>
     private void HighlightSquare()
     {
+
+        GetComponent<MeshCollider>().enabled = false;
+
+     
         if (GetComponent<Square>().State == BoardController.SquareState.Ant && BoardController.Instance.SquareSelected == -1)
         {
                 Debug.Log("Posicion: "+ this.id);
@@ -115,54 +146,58 @@ public class Square : MonoBehaviour
         }
         else 
         {
+          
             //Moving
             if (GetComponent<Square>().State == BoardController.SquareState.Empty)
             {
+
                 Debug.Log("Moving a empty square");
-
-
-                
-                BoardController.Instance.MyBoard[this.id].Faction=BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction;
-                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction = null;
-                BoardController.Instance.MyBoard[this.id].Faction.objectFaction.transform.position= BoardController.Instance.MyBoard[this.id].SquareObject.transform.position + new Vector3(0, 1, 0);
-
-                //Current turn
-                if (MatchController.Instance.Turn == (int)MatchController.TypeOfPlayers.Termite)
+                int sum = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier + BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
+                Debug.Log("la suma es: " + sum);
+                if (sum>1)
                 {
-                    BoardController.Instance.MyBoard[this.id].state = BoardController.SquareState.Termite;
+                    
+                    clics++;
+                    if (clics==1)
+                    {
+                        BoardController.Instance.LastClickedSquare = this.id;
+                        UIController.Instance.ActivatePanelMovement(true);
+                        BoardController.Instance.ResetStateSquareColor();
+                        BoardController.Instance.EnableSquareCollider(false);
+                        ChangeColorSquare(this.gameObject);
+                        GetComponent<MeshCollider>().enabled = true;
+                        clics++;
+                    }
+                    else
+                    {
+                        MovingFaction();
+                        UIController.Instance.ActivatePanelMovement(false);
+                        clics =0;
+                    }
+
                 }
-                else if (MatchController.Instance.Turn == (int)MatchController.TypeOfPlayers.Ant)
+                else
                 {
-                    BoardController.Instance.MyBoard[this.id].state = BoardController.SquareState.Ant;
+                    MovingFaction();
+                    UIController.Instance.ActivatePanelMovement(false);
                 }
 
-                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].state = BoardController.SquareState.Empty;
-                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].squareObject.GetComponent<Square>().state = BoardController.SquareState.Empty;
-                //Moved and deselected
-                BoardController.Instance.SquareSelected = -1;
-                BoardController.Instance.ResetStateSquareColor();
-                BoardController.Instance.MarkFactionsTurn();
 
 
 
 
             }
-            //Group
-            else if (GetComponent<Square>().State == BoardController.SquareState.Ant)
+            //Group 
+            else if ((int) GetComponent<Square>().State == (int)  MatchController.Instance.Turn )
             {
-                
-                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction = null;
-                BoardController.Instance.MyBoard[this.id].Faction.objectFaction.transform.position = BoardController.Instance.MyBoard[this.id].SquareObject.transform.position + new Vector3(0, 1, 0);
+                Debug.Log("Agrupooo");
 
-                //Current turn
-                if (MatchController.Instance.Turn == (int)MatchController.TypeOfPlayers.Termite)
-                {
-                    BoardController.Instance.MyBoard[this.id].state = BoardController.SquareState.Termite;
-                }
-                else if (MatchController.Instance.Turn == (int)MatchController.TypeOfPlayers.Ant)
-                {
-                    BoardController.Instance.MyBoard[this.id].state = BoardController.SquareState.Ant;
-                }
+
+               
+                BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker += BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
+                BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier += BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier;
+                Destroy(BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.objectFaction);
+                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction = null;
 
                 BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].state = BoardController.SquareState.Empty;
                 BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].squareObject.GetComponent<Square>().state = BoardController.SquareState.Empty;
@@ -170,13 +205,27 @@ public class Square : MonoBehaviour
                 BoardController.Instance.SquareSelected = -1;
                 BoardController.Instance.ResetStateSquareColor();
                 BoardController.Instance.MarkFactionsTurn();
-
-
+                clics = 0;
             }
             //Attack
-            else if (GetComponent<Square>().State == BoardController.SquareState.Termite)
+            else if ((int)GetComponent<Square>().State != (int)MatchController.Instance.Turn)
             {
-                Debug.Log("Attacking");
+                Debug.Log("Ataco");
+
+
+                /*Debug.Log(GetComponent<Square>().State.ToString() + "---" + (int)MatchController.Instance.Turn);
+                BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker += BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
+                BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier += BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier;
+                Destroy(BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.objectFaction);
+                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction = null;
+
+                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].state = BoardController.SquareState.Empty;
+                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].squareObject.GetComponent<Square>().state = BoardController.SquareState.Empty;
+                //Moved and deselected
+                BoardController.Instance.SquareSelected = -1;
+                BoardController.Instance.ResetStateSquareColor();
+                BoardController.Instance.MarkFactionsTurn();*/
+                clics = 0;
             }
             else
             {

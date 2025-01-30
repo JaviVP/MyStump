@@ -15,9 +15,9 @@ public class BoardController : MonoBehaviour
     [SerializeField] private List<Square> initialListTermites;
     public enum SquareState
     {
-        Empty,
-        Ant,
         Termite,
+        Ant,
+        Empty,
         Wood,
         TermiteWall,
         NoWakable
@@ -32,6 +32,7 @@ public class BoardController : MonoBehaviour
     private List <Square> myBoard = new List<Square> ();
 
     private int squareSelected=-1;
+    private int lastClickedSquare = -1;
 
     [SerializeField] private GameObject orderSquare;
     private GameObject orderSquareClon;
@@ -40,6 +41,7 @@ public class BoardController : MonoBehaviour
     public Color[] StatesColor { get => statesColor; set => statesColor = value; }
     public int SquareSelected { get => squareSelected; set => squareSelected = value; }
     public List<Square> MyBoard { get => myBoard; set => myBoard = value; }
+    public int LastClickedSquare { get => lastClickedSquare; set => lastClickedSquare = value; }
 
     private void Awake()
     {
@@ -81,15 +83,16 @@ public class BoardController : MonoBehaviour
             for (int i = 0; i < initialListAnts.Count; i++)
             {
                 AntGroup antG = new AntGroup();
-                antG.QuantitySoldier = 1;
-                antG.QuantityWorker = 0;
+                antG.QuantitySoldier = 3;
+                antG.QuantityWorker = 2;
                 antG.Type = MatchController.TypeOfPlayers.Ant;
                 antG.objectFaction = (GameObject)Instantiate(antObject, initialListAnts[i].transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                 //  initialListAnts[i].Faction = antG;
                 antG.objectFaction.transform.SetParent(MyBoard[initialListAnts[i].Id].SquareObject.transform);
                 MyBoard[initialListAnts[i].Id].Faction = antG;
                 MyBoard[initialListAnts[i].Id].SquareObject.GetComponent<Square>().Faction = antG;
-
+                MyBoard[initialListAnts[i].Id].State = BoardController.SquareState.Ant;
+                MyBoard[initialListAnts[i].Id].SquareObject.GetComponent<Square>().State= BoardController.SquareState.Ant;
             }
 
         }
@@ -112,6 +115,8 @@ public class BoardController : MonoBehaviour
                 
                 MyBoard[initialListTermites[i].Id].Faction = termiteG;
                 MyBoard[initialListAnts[i].Id].SquareObject.GetComponent<Square>().Faction = termiteG;
+                MyBoard[initialListAnts[i].Id].State = BoardController.SquareState.Termite;
+                MyBoard[initialListAnts[i].Id].SquareObject.GetComponent<Square>().State = BoardController.SquareState.Termite;
             }
 
         }
@@ -121,6 +126,35 @@ public class BoardController : MonoBehaviour
         }
         MarkFactionsTurn();
         UpdateTraces();
+
+    }
+    public void CreateFactionInEmptySquare(int i,MatchController.TypeOfPlayers type, int qs, int qw)
+    {
+        FactionAbstract faction = null;
+        GameObject obj = null;
+        if (type== MatchController.TypeOfPlayers.Termite)
+        {
+            faction = new TermiteGroup();
+            obj = termiteObject;
+        }
+        else
+        {
+            faction = new AntGroup();
+            obj = antObject;
+        }
+        
+        faction.QuantitySoldier = qs;
+        faction.QuantityWorker = qw;
+        faction.Type = type;
+        faction.objectFaction = (GameObject)Instantiate(obj, MyBoard[i].SquareObject.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        faction.objectFaction.transform.SetParent(MyBoard[i].SquareObject.transform);
+
+        MyBoard[i].Faction = faction;
+        MyBoard[i].SquareObject.GetComponent<Square>().Faction = faction;
+        MyBoard[i].State = BoardController.SquareState.Termite;
+        MyBoard[i].SquareObject.GetComponent<Square>().State = BoardController.SquareState.Termite;
+        UpdateTraces();
+
 
     }
     public void UpdateTraces()
@@ -235,6 +269,8 @@ public class BoardController : MonoBehaviour
         for (int i = 0; i < this.gameObject.transform.childCount; i++)
         {
             MyBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color= Color.white;
+            MyBoard[i].SquareObject.GetComponent<Square>().Clics = 0;
+            MyBoard[i].Clics = 0;
             //Debug.Log("Estadooo"+ myBoard[i].State);
             if (MyBoard[i].State == BoardController.SquareState.NoWakable)
             {
@@ -254,11 +290,26 @@ public class BoardController : MonoBehaviour
             }
         }
     }
+    public void UnSelected()
+    {
+        BoardController.Instance.SquareSelected = -1;
+        ResetStateSquareColor();
+        MarkFactionsTurn();
+    }
+
+
 
     // Update is called once per frame
     void Update()
     {
         
     }
+
+    private void OnMouseDown()
+    {
+    
+        UnSelected();
+    }
+
 }
 
