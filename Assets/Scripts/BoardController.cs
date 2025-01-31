@@ -128,35 +128,7 @@ public class BoardController : MonoBehaviour
         UpdateTraces();
 
     }
-    public void CreateFactionInEmptySquare(int i,MatchController.TypeOfPlayers type, int qs, int qw)
-    {
-        FactionAbstract faction = null;
-        GameObject obj = null;
-        if (type== MatchController.TypeOfPlayers.Termite)
-        {
-            faction = new TermiteGroup();
-            obj = termiteObject;
-        }
-        else
-        {
-            faction = new AntGroup();
-            obj = antObject;
-        }
-        
-        faction.QuantitySoldier = qs;
-        faction.QuantityWorker = qw;
-        faction.Type = type;
-        faction.objectFaction = (GameObject)Instantiate(obj, MyBoard[i].SquareObject.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-        faction.objectFaction.transform.SetParent(MyBoard[i].SquareObject.transform);
-
-        MyBoard[i].Faction = faction;
-        MyBoard[i].SquareObject.GetComponent<Square>().Faction = faction;
-        MyBoard[i].State = BoardController.SquareState.Termite;
-        MyBoard[i].SquareObject.GetComponent<Square>().State = BoardController.SquareState.Termite;
-        UpdateTraces();
-
-
-    }
+   
     public void UpdateTraces()
     {
         string trace = "";
@@ -309,6 +281,67 @@ public class BoardController : MonoBehaviour
     {
     
         UnSelected();
+    }
+
+
+    ///////////////////////////////////////////// Actions  ////////////////////////////////////////////////////////////
+
+    public void ActionMovingToEmptySquare(int i, MatchController.TypeOfPlayers type)
+    {
+
+        int qs = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier;
+        int qw = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
+
+        int qsUI = UIController.Instance.GetQuantitySoldiersMovingUI();
+        int qwUI = UIController.Instance.GetQuantityWorkersMovingUI();
+
+
+        Debug.Log("---QWUI"+ qwUI);
+
+        qs = qs - qsUI;
+        qw= qw - qwUI;
+
+        FactionAbstract faction = null;
+        GameObject obj = null;
+        if (type == MatchController.TypeOfPlayers.Termite)
+        {
+            faction = new TermiteGroup();
+            obj = termiteObject;
+        }
+        else
+        {
+            faction = new AntGroup();
+            obj = antObject;
+        }
+
+        faction.QuantitySoldier = qsUI;
+        faction.QuantityWorker = qwUI;
+        faction.Type = type;
+        faction.objectFaction = (GameObject)Instantiate(obj, MyBoard[i].SquareObject.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        faction.objectFaction.transform.SetParent(MyBoard[i].SquareObject.transform);
+
+        MyBoard[i].Faction = faction;
+        MyBoard[i].SquareObject.GetComponent<Square>().Faction = faction;
+        MyBoard[i].State = BoardController.SquareState.Termite;
+        MyBoard[i].SquareObject.GetComponent<Square>().State = BoardController.SquareState.Termite;
+
+        //Update selected Square
+        MyBoard[squareSelected].Faction.QuantitySoldier = qs;
+        MyBoard[squareSelected].Faction.QuantityWorker = qw;
+        if (qs==0 && qw==0)
+        {
+            //Destroy faction
+            Destroy(MyBoard[squareSelected].Faction.objectFaction);
+            MyBoard[squareSelected].Faction = null;
+            MyBoard[squareSelected].State= BoardController.SquareState.Empty;
+            MyBoard[squareSelected].SquareObject.GetComponent<Square>().State = BoardController.SquareState.Empty;
+        }
+
+
+        UpdateTraces();
+        UnSelected();
+
+
     }
 
 }

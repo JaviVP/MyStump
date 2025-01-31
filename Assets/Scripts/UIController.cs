@@ -61,34 +61,55 @@ public class UIController : MonoBehaviour
     {
         int v = int.Parse(panelMovement.transform.GetChild(1).GetChild(2).GetComponent<TMP_Text>().text);
         v = v + 1;
-        if (v >= 3) //ERROR ONLY CURRENT SQUARE SOLDIERS
+        if (v >= BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier) //ERROR ONLY CURRENT SQUARE SOLDIERS
         {
-            v = 3;
+            v = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier;
+            panelMovement.transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
         }
-        panelMovement.transform.GetChild(1).GetChild(0).gameObject.SetActive(true);
+        else
+        {
+            panelMovement.transform.GetChild(1).GetChild(0).gameObject.SetActive(true);
+        }
+        panelMovement.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
         panelMovement.transform.GetChild(1).GetChild(2).GetComponent<TMP_Text>().text = v.ToString();
     }
+
+    
+
     public void LessButtonSoldierMoving()
     {
         int v = int.Parse(panelMovement.transform.GetChild(1).GetChild(2).GetComponent<TMP_Text>().text);
         v = v - 1;
         if (v <= 0)
         {
+            panelMovement.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
             v = 0;
+        }
+        else
+        {
+            panelMovement.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
         }
         panelMovement.transform.GetChild(1).GetChild(0).gameObject.SetActive(true);
         panelMovement.transform.GetChild(1).GetChild(2).GetComponent<TMP_Text>().text = v.ToString();
     }
+
     public void MoreButtonWorkerMoving()
     {
         int v = int.Parse(panelMovement.transform.GetChild(2).GetChild(2).GetComponent<TMP_Text>().text);
         v = v + 1;
-        if (v >=3) //ERROR ONLY CURRENT SQUARE WORKERS
+        if (v >= BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker) //ERROR ONLY CURRENT SQUARE WORKERS
         {
-            v = 3;
+            panelMovement.transform.GetChild(2).GetChild(0).gameObject.SetActive(false);
+            v = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
         }
-        panelMovement.transform.GetChild(2).GetChild(0).gameObject.SetActive(true);
+        else
+        {
+            panelMovement.transform.GetChild(2).GetChild(0).gameObject.SetActive(true);
+        }
+        panelMovement.transform.GetChild(2).GetChild(1).gameObject.SetActive(true);
         panelMovement.transform.GetChild(2).GetChild(2).GetComponent<TMP_Text>().text = v.ToString();
+
+        Debug.Log("UIQW: " + GetQuantityWorkersMovingUI());
     }
     public void LessButtonWorkerMoving()
     {
@@ -96,17 +117,37 @@ public class UIController : MonoBehaviour
         v = v - 1;
         if (v<=0)
         {
+            panelMovement.transform.GetChild(2).GetChild(1).gameObject.SetActive(false);
             v = 0;
+        }
+        else
+        {
+            panelMovement.transform.GetChild(2).GetChild(1).gameObject.SetActive(true);
         }
         panelMovement.transform.GetChild(2).GetChild(0).gameObject.SetActive(true);
         panelMovement.transform.GetChild(2).GetChild(2).GetComponent<TMP_Text>().text = v.ToString();
-    }
 
+        Debug.Log("UIQW: " + GetQuantityWorkersMovingUI());
+
+    }
+    public int GetQuantitySoldiersMovingUI()
+    {
+        return int.Parse(panelMovement.transform.GetChild(1).GetChild(2).GetComponent<TMP_Text>().text);
+    }
+    public int GetQuantityWorkersMovingUI()
+    {
+        return int.Parse(panelMovement.transform.GetChild(2).GetChild(2).GetComponent<TMP_Text>().text);
+    }
     public void MovingActionButton()
     {
+
+        Debug.Log("UIQW: "+GetQuantityWorkersMovingUI());
         panelMovement.transform.GetChild(2).GetChild(0).gameObject.SetActive(false);
         panelMovement.transform.GetChild(2).GetChild(0).gameObject.SetActive(false);
-        ActivatePanelMovement(false);
+
+        
+
+        
         MatchController.TypeOfPlayers type;
         if ((int) MatchController.TypeOfPlayers.Ant==  MatchController.Instance.Turn)
         {
@@ -116,7 +157,8 @@ public class UIController : MonoBehaviour
         {
             type = MatchController.TypeOfPlayers.Termite;
         }
-        BoardController.Instance.CreateFactionInEmptySquare(BoardController.Instance.LastClickedSquare, type, 2, 2);
+        BoardController.Instance.ActionMovingToEmptySquare(BoardController.Instance.LastClickedSquare, type);
+        ActivatePanelMovement(false);
     }
 
     // Update is called once per frame
