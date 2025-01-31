@@ -63,8 +63,9 @@ public class MatchController : MonoBehaviour
            
         }
         typePlayerTurn = (TypeOfPlayers)turn;
+        BoardController.Instance.UnSelected();
         BoardController.Instance.MarkFactionsTurn();
-
+        UIController.Instance.ActivatePanelMovement(false);
 
     }
 }
