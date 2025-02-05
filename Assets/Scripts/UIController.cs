@@ -8,12 +8,14 @@ public class UIController : MonoBehaviour
     private TMP_Text tracesUI;
     [SerializeField]
     private GameObject panelMovement;
+    [SerializeField]
+    private TMP_Text actionsRemainingUI;
 
 
 
     public static UIController Instance { get; private set; }
 
-    
+
 
     private void Awake()
     {
@@ -31,7 +33,7 @@ public class UIController : MonoBehaviour
 
     public void WriteTrace(string t)
     {
-        tracesUI.text += t+ "\n";
+        tracesUI.text += t + "\n";
     }
     public void ActivatePanelMovement(bool v)
     {
@@ -45,7 +47,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    
+
     public void ResetAllTraces()
     {
         tracesUI.text = "";
@@ -73,8 +75,6 @@ public class UIController : MonoBehaviour
         panelMovement.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
         panelMovement.transform.GetChild(1).GetChild(2).GetComponent<TMP_Text>().text = v.ToString();
     }
-
-    
 
     public void LessButtonSoldierMoving()
     {
@@ -115,7 +115,7 @@ public class UIController : MonoBehaviour
     {
         int v = int.Parse(panelMovement.transform.GetChild(2).GetChild(2).GetComponent<TMP_Text>().text);
         v = v - 1;
-        if (v<=0)
+        if (v <= 0)
         {
             panelMovement.transform.GetChild(2).GetChild(1).gameObject.SetActive(false);
             v = 0;
@@ -141,15 +141,12 @@ public class UIController : MonoBehaviour
     public void MovingActionButton()
     {
 
-        Debug.Log("UIQW: "+GetQuantityWorkersMovingUI());
+        Debug.Log("UIQW: " + GetQuantityWorkersMovingUI());
         panelMovement.transform.GetChild(2).GetChild(0).gameObject.SetActive(false);
         panelMovement.transform.GetChild(2).GetChild(0).gameObject.SetActive(false);
 
-        
-
-        
         MatchController.TypeOfPlayers type;
-        if ((int) MatchController.TypeOfPlayers.Ant==  MatchController.Instance.Turn)
+        if ((int)MatchController.TypeOfPlayers.Ant == MatchController.Instance.Turn)
         {
             type = MatchController.TypeOfPlayers.Ant;
         }
@@ -161,9 +158,22 @@ public class UIController : MonoBehaviour
         ActivatePanelMovement(false);
     }
 
+    public void UpdateActionsText()
+    {
+        if (actionsRemainingUI != null)
+        {
+            Debug.Log("Actualizando UI con acciones: " + MatchController.Instance.ActionsRemaining);
+            actionsRemainingUI.text = MatchController.Instance.ActionsRemaining.ToString();
+        }
+        else
+        {
+            Debug.LogWarning("actionsRemainingUI no está asignado en el Inspector.");
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

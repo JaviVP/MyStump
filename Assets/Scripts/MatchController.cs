@@ -24,6 +24,7 @@ public class MatchController : MonoBehaviour
     private TypeofTroppes typeTroppes;
     private int turn = 0;
     private int actionsPerTurn = 3;
+    private int actionsRemaining;
     private int numPlayers = 2;
 
     public static MatchController Instance { get; private set; }
@@ -31,6 +32,8 @@ public class MatchController : MonoBehaviour
     public int ActionsPerTurn { get => actionsPerTurn; set => actionsPerTurn = value; }
     public int NumPlayers { get => numPlayers; set => numPlayers = value; }
     public int MaxSoldiersInGame { get => maxSoldiersInGame; set => maxSoldiersInGame = value; }
+    public int ActionsRemaining { get => actionsRemaining; }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
@@ -49,6 +52,8 @@ public class MatchController : MonoBehaviour
     void Start()
     {
         turn = 1;
+        actionsRemaining = actionsPerTurn;
+        UIController.Instance.UpdateActionsText();
         /*typePlayer = TypeOfPlayers.Termite;
         Debug.Log(typePlayer.ToString()+ " -- " + (int) typePlayer);
         typePlayer = (TypeOfPlayers) 1;
@@ -57,15 +62,39 @@ public class MatchController : MonoBehaviour
     public void ChangeTurn()
     {
         turn++;
-        if (turn>=numPlayers)
+        if (turn >= numPlayers)
         {
             turn = 0;
-           
+
         }
         typePlayerTurn = (TypeOfPlayers)turn;
+        actionsRemaining = actionsPerTurn;
         BoardController.Instance.UnSelected();
         BoardController.Instance.MarkFactionsTurn();
         UIController.Instance.ActivatePanelMovement(false);
+        UIController.Instance.UpdateActionsText();
+
+        Debug.Log("Turn change. Now play: " + typePlayerTurn + ". Actions remaining: " + actionsRemaining);
+
+    }
+
+    public bool CanPerformAction()
+    {
+        return actionsRemaining > 0;
+    }
+
+    public void UseAction()
+    {
+        if (actionsRemaining > 0)
+        {
+            actionsRemaining--;
+            UIController.Instance.UpdateActionsText();
+            Debug.Log("Action completed. Remaining actions: " + actionsRemaining);
+        }
+        else
+        {
+            Debug.Log("No actions available");
+        }
 
     }
 }

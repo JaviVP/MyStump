@@ -29,9 +29,9 @@ public class BoardController : MonoBehaviour
     private Color[] statesColor;
 
 
-    private List <Square> myBoard = new List<Square> ();
+    private List<Square> myBoard = new List<Square>();
 
-    private int squareSelected=-1;
+    private int squareSelected = -1;
     private int lastClickedSquare = -1;
 
     [SerializeField] private GameObject orderSquare;
@@ -62,11 +62,11 @@ public class BoardController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       
+
         AssignObjectsSquare();
         Invoke("InitialFactions", 0.1f);
 
-       
+
 
     }
     /// <summary>
@@ -74,9 +74,9 @@ public class BoardController : MonoBehaviour
     /// </summary>
     public void InitialFactions()
     {
-       // int randomPoint = Random.Range(0, this.gameObject.transform.childCount);
-       /* myBoard[70].SquareObject.GetComponent<MeshRenderer>().material.color = Color.white;
-        myBoard[75].SquareObject.GetComponent<MeshRenderer>().material.color = Color.white;*/
+        // int randomPoint = Random.Range(0, this.gameObject.transform.childCount);
+        /* myBoard[70].SquareObject.GetComponent<MeshRenderer>().material.color = Color.white;
+         myBoard[75].SquareObject.GetComponent<MeshRenderer>().material.color = Color.white;*/
 
         if (initialListAnts.Count > 0)
         {
@@ -92,7 +92,7 @@ public class BoardController : MonoBehaviour
                 MyBoard[initialListAnts[i].Id].Faction = antG;
                 MyBoard[initialListAnts[i].Id].SquareObject.GetComponent<Square>().Faction = antG;
                 MyBoard[initialListAnts[i].Id].State = BoardController.SquareState.Ant;
-                MyBoard[initialListAnts[i].Id].SquareObject.GetComponent<Square>().State= BoardController.SquareState.Ant;
+                MyBoard[initialListAnts[i].Id].SquareObject.GetComponent<Square>().State = BoardController.SquareState.Ant;
             }
 
         }
@@ -112,7 +112,7 @@ public class BoardController : MonoBehaviour
                 termiteG.objectFaction = (GameObject)Instantiate(termiteObject, initialListTermites[i].transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                 // initialListTermites[i].Faction = termiteG;
                 termiteG.objectFaction.transform.SetParent(MyBoard[initialListAnts[i].Id].SquareObject.transform);
-                
+
                 MyBoard[initialListTermites[i].Id].Faction = termiteG;
                 MyBoard[initialListAnts[i].Id].SquareObject.GetComponent<Square>().Faction = termiteG;
                 MyBoard[initialListAnts[i].Id].State = BoardController.SquareState.Termite;
@@ -128,23 +128,23 @@ public class BoardController : MonoBehaviour
         UpdateTraces();
 
     }
-   
+
     public void UpdateTraces()
     {
         string trace = "";
         UIController.Instance.ResetAllTraces();
         for (int i = 0; i < this.gameObject.transform.childCount; i++)
         {
-            
-                trace = MyBoard[i].Id.ToString() + ") St: " + MyBoard[i].State;
-                if (MyBoard[i].Faction != null)
-                {
-                    trace += " #F:" + MyBoard[i].Faction.Type.ToString().Substring(0, 3) + "- S:" + MyBoard[i].Faction.QuantitySoldier + " T:" + MyBoard[i].Faction.QuantityWorker;
-                    UIController.Instance.WriteTrace(trace);
-                }
-                
 
-            
+            trace = MyBoard[i].Id.ToString() + ") St: " + MyBoard[i].State;
+            if (MyBoard[i].Faction != null)
+            {
+                trace += " #F:" + MyBoard[i].Faction.Type.ToString().Substring(0, 3) + "- S:" + MyBoard[i].Faction.QuantitySoldier + " T:" + MyBoard[i].Faction.QuantityWorker;
+                UIController.Instance.WriteTrace(trace);
+            }
+
+
+
 
         }
     }
@@ -190,7 +190,7 @@ public class BoardController : MonoBehaviour
             if (MyBoard[i].Faction != null)
             {
                 MyBoard[i].Faction.objectFaction.transform.GetChild(0).gameObject.SetActive(false);
-                
+
             }
             else
             {
@@ -208,10 +208,10 @@ public class BoardController : MonoBehaviour
             //Debug.Log("Ant turn");
             for (int i = 0; i < MyBoard.Count; i++)
             {
-                if (MyBoard[i].Faction != null && MyBoard[i].Faction.Type== MatchController.TypeOfPlayers.Ant)
+                if (MyBoard[i].Faction != null && MyBoard[i].Faction.Type == MatchController.TypeOfPlayers.Ant)
                 {
-                    MyBoard[i].State= SquareState.Ant;
-                    MyBoard[i].SquareObject.GetComponent<Square>().State= SquareState.Ant;
+                    MyBoard[i].State = SquareState.Ant;
+                    MyBoard[i].SquareObject.GetComponent<Square>().State = SquareState.Ant;
                     MyBoard[i].Faction.objectFaction.transform.GetChild(0).gameObject.SetActive(true);
                     MyBoard[i].SquareObject.GetComponent<MeshCollider>().enabled = true;
                 }
@@ -240,18 +240,18 @@ public class BoardController : MonoBehaviour
         //Debug.Log("Reseteamos");
         for (int i = 0; i < this.gameObject.transform.childCount; i++)
         {
-            MyBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color= Color.white;
+            MyBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = Color.white;
             MyBoard[i].SquareObject.GetComponent<Square>().Clics = 0;
             MyBoard[i].Clics = 0;
             //Debug.Log("Estadooo"+ myBoard[i].State);
             if (MyBoard[i].State == BoardController.SquareState.NoWakable)
             {
-               
+
                 MyBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.NoWakable]; ;
-                MyBoard[i].SquareObject.GetComponent<MeshCollider>().enabled= false;
-                MyBoard[i].SquareObject.GetComponent<MeshRenderer>().enabled= false;
+                MyBoard[i].SquareObject.GetComponent<MeshCollider>().enabled = false;
+                MyBoard[i].SquareObject.GetComponent<MeshRenderer>().enabled = false;
             }
-            else if  (MyBoard[i].State == BoardController.SquareState.Wood)
+            else if (MyBoard[i].State == BoardController.SquareState.Wood)
             {
 
                 MyBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Wood]; ;
@@ -274,12 +274,12 @@ public class BoardController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnMouseDown()
     {
-    
+
         UnSelected();
     }
 
@@ -289,6 +289,12 @@ public class BoardController : MonoBehaviour
     public void ActionMovingToEmptySquare(int i, MatchController.TypeOfPlayers type)
     {
 
+        if (!MatchController.Instance.CanPerformAction())
+        {
+            Debug.Log("No actions available this turn");
+            return;
+        }
+
         int qs = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier;
         int qw = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
 
@@ -296,13 +302,14 @@ public class BoardController : MonoBehaviour
         int qwUI = UIController.Instance.GetQuantityWorkersMovingUI();
 
 
-        Debug.Log("---QWUI"+ qwUI);
+        Debug.Log("---QWUI" + qwUI);
 
         qs = qs - qsUI;
-        qw= qw - qwUI;
+        qw = qw - qwUI;
 
         FactionAbstract faction = null;
         GameObject obj = null;
+
         if (type == MatchController.TypeOfPlayers.Termite)
         {
             faction = new TermiteGroup();
@@ -328,15 +335,18 @@ public class BoardController : MonoBehaviour
         //Update selected Square
         MyBoard[squareSelected].Faction.QuantitySoldier = qs;
         MyBoard[squareSelected].Faction.QuantityWorker = qw;
-        if (qs==0 && qw==0)
+        if (qs == 0 && qw == 0)
         {
             //Destroy faction
             Destroy(MyBoard[squareSelected].Faction.objectFaction);
             MyBoard[squareSelected].Faction = null;
-            MyBoard[squareSelected].State= BoardController.SquareState.Empty;
+            MyBoard[squareSelected].State = BoardController.SquareState.Empty;
             MyBoard[squareSelected].SquareObject.GetComponent<Square>().State = BoardController.SquareState.Empty;
         }
 
+        Debug.Log("Llamando a UseAction()...");
+        MatchController.Instance.UseAction();
+        UIController.Instance.UpdateActionsText();
 
         UpdateTraces();
         UnSelected();

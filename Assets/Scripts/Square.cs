@@ -173,6 +173,8 @@ public class Square : MonoBehaviour
                         MovingFaction();
                         UIController.Instance.ActivatePanelMovement(false);
                         clics =0;
+                        MatchController.Instance.UseAction();
+                        UIController.Instance.UpdateActionsText();
                     }
 
                 }
