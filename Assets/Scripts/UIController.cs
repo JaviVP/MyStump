@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using static MatchController;
 
 public class UIController : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class UIController : MonoBehaviour
     private GameObject panelMovement;
     [SerializeField]
     private TMP_Text actionsRemainingUI;
+    [SerializeField]
+    private TMP_Text turnPlayerInfoUI;
+
 
 
 
@@ -170,6 +174,21 @@ public class UIController : MonoBehaviour
             Debug.LogWarning("actionsRemainingUI no está asignado en el Inspector.");
         }
     }
+
+    public void UpdateTurnUI()
+    {
+        if (MatchController.Instance.TypePlayerTurn == TypeOfPlayers.Termite)
+        {
+            turnPlayerInfoUI.text = "Termites";
+        }
+        else
+        {
+            turnPlayerInfoUI.text = "Ants";
+        }
+
+        Debug.Log("Turn UI updated: " + turnPlayerInfoUI.text);
+    }
+
 
     // Update is called once per frame
     void Update()

@@ -33,6 +33,7 @@ public class MatchController : MonoBehaviour
     public int NumPlayers { get => numPlayers; set => numPlayers = value; }
     public int MaxSoldiersInGame { get => maxSoldiersInGame; set => maxSoldiersInGame = value; }
     public int ActionsRemaining { get => actionsRemaining; }
+    public TypeOfPlayers TypePlayerTurn { get => typePlayerTurn;}
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -54,6 +55,8 @@ public class MatchController : MonoBehaviour
         turn = 1;
         actionsRemaining = actionsPerTurn;
         UIController.Instance.UpdateActionsText();
+        typePlayerTurn = (TypeOfPlayers)turn;
+        UIController.Instance.UpdateTurnUI();
         /*typePlayer = TypeOfPlayers.Termite;
         Debug.Log(typePlayer.ToString()+ " -- " + (int) typePlayer);
         typePlayer = (TypeOfPlayers) 1;
@@ -68,7 +71,12 @@ public class MatchController : MonoBehaviour
 
         }
         typePlayerTurn = (TypeOfPlayers)turn;
+
+        // Actualizar UI
+        UIController.Instance.UpdateTurnUI();
+
         actionsRemaining = actionsPerTurn;
+       
         BoardController.Instance.UnSelected();
         BoardController.Instance.MarkFactionsTurn();
         UIController.Instance.ActivatePanelMovement(false);
