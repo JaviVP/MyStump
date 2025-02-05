@@ -20,6 +20,7 @@ public class BoardController : MonoBehaviour
         Empty,
         Wood,
         TermiteWall,
+        AntHill,
         NoWakable
     }
     [SerializeField]
@@ -335,6 +336,11 @@ public class BoardController : MonoBehaviour
         //Update selected Square
         MyBoard[squareSelected].Faction.QuantitySoldier = qs;
         MyBoard[squareSelected].Faction.QuantityWorker = qw;
+
+        //Update the number of units are in the selected square
+        /*MyBoard[squareSelected].UpdateUnitCountText();
+        MyBoard[i].UpdateUnitCountText();*/
+
         if (qs == 0 && qw == 0)
         {
             //Destroy faction

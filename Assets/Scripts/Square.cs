@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class Square : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class Square : MonoBehaviour
     private FactionAbstract faction;
     [SerializeField]
     private BoardController.SquareState state;
+    /*[SerializeField] 
+    private TMP_Text unitCountText;*/
     public GameObject SquareObject { get => squareObject; set => squareObject = value; }
     public BoardController.SquareState State { get => state; set => state = value; }
     public FactionAbstract Faction { get => faction; set => faction = value; }
@@ -34,6 +37,7 @@ public class Square : MonoBehaviour
         //HighlightSquare();
         //Crear un método en la clase board que pongar todos los square a white(estado normal).
         ChangeColorSquare(this.gameObject);
+        //UpdateUnitCountText();
 
 
 
@@ -237,6 +241,22 @@ public class Square : MonoBehaviour
         }
         
     }
+
+   /*public void UpdateUnitCountText()
+    {
+        if (Faction != null)
+        {
+            int totalUnits = Faction.QuantitySoldier + Faction.QuantityWorker;
+            unitCountText.text = totalUnits.ToString();
+            unitCountText.gameObject.SetActive(totalUnits > 0); // Mostrar solo si hay unidades
+        }
+        else
+        {
+            unitCountText.text = "0"; // Si no hay facción, mostrar 0
+            unitCountText.gameObject.SetActive(false); // Ocultar el texto
+        }
+    }*/
+
 
     private void OnMouseDown()
     {
