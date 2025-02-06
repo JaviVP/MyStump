@@ -2230,7 +2230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -56.900085, y: 136.8}
+  m_AnchoredPosition: {x: -50.4, y: 136.4}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &167298379
@@ -10904,6 +10904,7 @@ MonoBehaviour:
   resetButton: {fileID: 800070453}
   perspectiveThreshold: 85
   topDownThreshold: 20
+  endTurnButton: {fileID: 934623188}
 --- !u!114 &980012378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18305,7 +18306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -134.7, y: 136.8}
+  m_AnchoredPosition: {x: -139.4, y: 136.3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1670335119

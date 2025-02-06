@@ -25,6 +25,8 @@ public class CamerasController : MonoBehaviour
     private Vector3 initialPosition1, initialPosition2, initialPositionTop;
     private Quaternion initialRotation1, initialRotation2, initialRotationTop;
 
+    [SerializeField] private GameObject endTurnButton;
+
     public static CamerasController Instance { get; private set; }
 
     private void Awake()
@@ -51,7 +53,8 @@ public class CamerasController : MonoBehaviour
 
         initialPositionTop = topDownCamera.transform.position;
         initialRotationTop = topDownCamera.transform.rotation;
-      
+
+        topDownCamera.transform.rotation = Quaternion.Euler(90, 0, 90);
 
         // Comienza solo con la cámara 1 activa
         ActivateCamera(camera1);
@@ -130,6 +133,7 @@ public class CamerasController : MonoBehaviour
             ActivateCamera(topDownCamera);
             isTopDownActive = true;
             zoomingToTopDown = true;
+            endTurnButton.SetActive(false);
         }
         else if (activeCamera == topDownCamera && currentZoom == topDownThreshold && isTopDownActive && zoomingToTopDown)
         {
@@ -137,6 +141,7 @@ public class CamerasController : MonoBehaviour
             isTopDownActive = false;
             zoomingToTopDown = false;
             topDownCamera.Lens.FieldOfView = 26.0f;
+            endTurnButton.SetActive(true);
         }
     }
 
@@ -161,22 +166,27 @@ public class CamerasController : MonoBehaviour
 
     public void SwitchCamera()
     {
-        if (activeCamera == camera1)
-        {
-            ActivateCamera(camera2);
-            topDownCamera.transform.rotation = Quaternion.Euler(90, 0, -90);
-        }
-        else if (activeCamera == camera2)
-        {
-            ActivateCamera(camera1);
-            topDownCamera.transform.rotation = Quaternion.Euler(0, 0, 90);
-        }
+       
+            if (activeCamera == camera1)
+            {
+
+                ActivateCamera(camera2);
+                topDownCamera.transform.rotation = Quaternion.Euler(90, 0, -90);
+            }
+            else if (activeCamera == camera2)
+            {
+
+                ActivateCamera(camera1);
+                topDownCamera.transform.rotation = Quaternion.Euler(90, 0, 90);
+            }
+
     }
 
     public CinemachineCamera GetActiveCamera()
     {
         return activeCamera;
     }
+
 }
 
 
