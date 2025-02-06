@@ -10834,6 +10834,8 @@ GameObject:
   - component: {fileID: 980012375}
   - component: {fileID: 980012374}
   - component: {fileID: 980012377}
+  - component: {fileID: 980012379}
+  - component: {fileID: 980012378}
   m_Layer: 0
   m_Name: Acumulador
   m_TagString: Untagged
@@ -10902,6 +10904,30 @@ MonoBehaviour:
   resetButton: {fileID: 800070453}
   perspectiveThreshold: 85
   topDownThreshold: 20
+--- !u!114 &980012378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980012373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e55e629bda68464196d2ab7e52e489a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &980012379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980012373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7be8333fea716409e5e2d9c743a9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &983983576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16577,10 +16603,10 @@ MonoBehaviour:
   zoomSpeed: 15
   minZoom: 15
   maxZoom: 85
-  minX: 0
-  maxX: 0
+  minX: -10
+  maxX: 10
   minZ: -15
-  maxZ: 0
+  maxZ: 8.38
 --- !u!114 &1515622836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20982,10 +21008,10 @@ MonoBehaviour:
   zoomSpeed: 15
   minZoom: 15
   maxZoom: 85
-  minX: 0
-  maxX: -5
-  minZ: -15
-  maxZ: 0
+  minX: -10
+  maxX: 10
+  minZ: -37.04
+  maxZ: -10
 --- !u!114 &1957694962
 MonoBehaviour:
   m_ObjectHideFlags: 0

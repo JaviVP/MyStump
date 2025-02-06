@@ -64,6 +64,7 @@ public class MatchController : MonoBehaviour
     }
     public void ChangeTurn()
     {
+        CamerasController.Instance.SwitchCamera();
         turn++;
         if (turn >= numPlayers)
         {

@@ -25,6 +25,21 @@ public class CamerasController : MonoBehaviour
     private Vector3 initialPosition1, initialPosition2, initialPositionTop;
     private Quaternion initialRotation1, initialRotation2, initialRotationTop;
 
+    public static CamerasController Instance { get; private set; }
+
+    private void Awake()
+    {
+        // If there is an instance, and it's not me, delete myself.
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     void Start()
     {
         // Guardar posición y rotación inicial de las cámaras
@@ -64,7 +79,7 @@ public class CamerasController : MonoBehaviour
                 topDownCamera.transform.rotation = Quaternion.Euler(90, 0, 90);
             }
         }
-
+        /*
         if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             float currentTime = Time.time;
@@ -74,7 +89,7 @@ public class CamerasController : MonoBehaviour
             }
             lastTapTime = currentTime;
         }
-
+        */
         CheckTopDownCamera();
     }
 
@@ -144,7 +159,7 @@ public class CamerasController : MonoBehaviour
 
     }
 
-    void SwitchCamera()
+    public void SwitchCamera()
     {
         if (activeCamera == camera1)
         {

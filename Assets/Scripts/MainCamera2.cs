@@ -27,8 +27,6 @@ public class MainCamera2 : MonoBehaviour
 
     void MoveCamera()
     {
-
-
         Vector3 newPosition = transform.position;
 
         // Movimiento en el eje Z con el clic izquierdo
