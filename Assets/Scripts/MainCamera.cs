@@ -26,6 +26,7 @@ public class MainCamera : MonoBehaviour
     {
         MoveCameraPC();   // Movimiento con mouse
         MoveCameraTouch(); // Movimiento con táctil
+        ZoomCameraTouch();
         ZoomCamera();
     }
 
@@ -89,18 +90,10 @@ public class MainCamera : MonoBehaviour
         }
     }
 
-    void ZoomCamera()
+    void ZoomCameraTouch()
     {
         // Control del zoom con la rueda del ratón
-        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
-
-        if (scrollInput != 0f && virtualCamera != null)
-        {
-            LensSettings lens = virtualCamera.Lens;
-            lens.FieldOfView -= scrollInput * zoomSpeed;
-            lens.FieldOfView = Mathf.Clamp(lens.FieldOfView, minZoom, maxZoom);
-            virtualCamera.Lens = lens;
-        }
+       
 
         // Zoom en móviles con gesto de "pinza"
         if (Input.touchCount == 2)
@@ -125,5 +118,19 @@ public class MainCamera : MonoBehaviour
             lens.FieldOfView = Mathf.Clamp(lens.FieldOfView, minZoom, maxZoom);
             virtualCamera.Lens = lens;
         }
+    }
+
+    public void ZoomCamera()
+    {
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scrollInput != 0f && virtualCamera != null)
+        {
+            LensSettings lens = virtualCamera.Lens;
+            lens.FieldOfView -= scrollInput * zoomSpeed;
+            lens.FieldOfView = Mathf.Clamp(lens.FieldOfView, minZoom, maxZoom);
+            virtualCamera.Lens = lens;
+        }
+
     }
 }
