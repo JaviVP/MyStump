@@ -49,7 +49,7 @@ public class LogicController : MonoBehaviour
     IEnumerator CombatSequence(int antS, int antW, int terS, int terW)
     {
         // Lanzar dados
-        DicesController.Instance.ThrowDices(1,1,0,2);
+        DicesController.Instance.ThrowDices(antS, antW, terS, terW);
         yield return new WaitForSeconds(3);
         // Datos devueltos de los dados
         resultDice1 = DicesController.Instance.GetDice1();

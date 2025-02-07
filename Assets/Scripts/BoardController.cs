@@ -65,7 +65,7 @@ public class BoardController : MonoBehaviour
     {
 
         AssignObjectsSquare();
-        Invoke("InitialFactions", 0.1f);
+        Invoke("InitialTroops", 0.1f);
 
 
 
@@ -73,7 +73,7 @@ public class BoardController : MonoBehaviour
     /// <summary>
     /// Define the initial faction positions
     /// </summary>
-    public void InitialFactions()
+    public void InitialTroops()
     {
         // int randomPoint = Random.Range(0, this.gameObject.transform.childCount);
         /* myBoard[70].SquareObject.GetComponent<MeshRenderer>().material.color = Color.white;
