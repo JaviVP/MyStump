@@ -9,6 +9,7 @@ TagManager:
   - Ant
   - Termite
   - UnSelected
+  - Dice
   layers:
   - Default
   - TransparentFX
