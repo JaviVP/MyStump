@@ -260,6 +260,7 @@ public class Square : MonoBehaviour
 
     private void OnMouseDown()
     {
+
         HighlightSquare();
 
     }

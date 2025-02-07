@@ -36,7 +36,7 @@ public class CamaraCenital : MonoBehaviour
             lens.FieldOfView = Mathf.Clamp(lens.FieldOfView, minZoom, maxZoom);
             TopcinemachineCamera.Lens = lens; // Aplicar cambios
         }
-        Debug.Log(Input.touchCount);
+        
       
         if (Input.touchCount == 2)
         {
