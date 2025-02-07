@@ -5,7 +5,7 @@ public class MatchController : MonoBehaviour
 
     private int maxSoldiersInGame = 3;
     private int maxSoldiersInSquare = 3;
-    private int maxFactionsInSquare = 6;
+    private int maxTroopsInSquare = 6;
 
 
     public enum TypeOfPlayers
@@ -13,15 +13,16 @@ public class MatchController : MonoBehaviour
         Termite,
         Ant
     }
-    public enum TypeofTroppes
+    public enum TypeofTroops
     {
         AntSoldier,
         AntWorker,
         TermiteSoldier,
         TermiteWorker
     }
+
     private TypeOfPlayers typePlayerTurn;
-    private TypeofTroppes typeTroppes;
+    private TypeofTroops typeTroops;
     private int turn = 0;
     private int actionsPerTurn = 3;
     private int actionsRemaining;
