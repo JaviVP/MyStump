@@ -5,10 +5,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Dice
 {
-    [SerializeField]
-    private string name;
-    [SerializeField]
-    private List<DiceFace> faces;
+    public string name;
+    public List<DiceFace> faces;
 
     public DiceFace Roll()
     {
@@ -35,18 +33,20 @@ public class DiceThrower : MonoBehaviour
     private DiceFace attackerRoll;
     private DiceFace defenderRoll;
 
-    public void RollDice(int attackerWorkers, int attackerSoldiers, int defenderWorkers, int defenderSoldiers)
+    public (DiceFace AttackerResult, DiceFace DefenderResult) RollDice(int attackerWorkers, int attackerSoldiers, int defenderWorkers, int defenderSoldiers)
     {
-        attackerDice = GetDicePosition(attackerWorkers + attackerSoldiers);
-        defenderDice = GetDicePosition(defenderWorkers + defenderSoldiers);
+        attackerDice = GetDiceType(attackerWorkers + attackerSoldiers);
+        defenderDice = GetDiceType(defenderWorkers + defenderSoldiers);
 
         attackerRoll = attackerDice.Roll();
         defenderRoll = defenderDice.Roll();
 
+        //Consola
         Debug.Log($"Attacker rolled: {attackerRoll.swords} swords, {attackerRoll.shields} shields.");
         Debug.Log($"Defender rolled: {defenderRoll.swords} swords, {defenderRoll.shields} shields.");
 
-        FindFirstObjectByType<BattleResolver>().ResolveBattle(attackerRoll, defenderRoll, attackerWorkers, attackerSoldiers, defenderWorkers, defenderSoldiers);
+        //FindFirstObjectByType<BattleResolver>().ResolveBattle(attackerRoll, defenderRoll, attackerWorkers, attackerSoldiers, defenderWorkers, defenderSoldiers);
+        return (attackerRoll,defenderRoll);
     }
 
 
@@ -61,7 +61,7 @@ public class DiceThrower : MonoBehaviour
 
     // Mas escalable que lo de arriba ↑↑↑, pero usa mas recursos. Si se necesita se quita lo de abajo
 
-    private Dice GetDicePosition(int troopCount)
+    private Dice GetDiceType(int troopCount)
     {
         return availableDice[ Mathf.FloorToInt(Mathf.Log(troopCount, 2)) + 1];
     }
