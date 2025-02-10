@@ -4,7 +4,12 @@ using UnityEngine;
 public class DiceMassIncrease : MonoBehaviour
 {
     [SerializeField] private float massIncrease = 0.5f; // Cantidad de masa que se suma en cada colisión
-    [SerializeField] private GameObject fxCollision;    // Efecto visual de la colisión
+    [SerializeField] private GameObject fxCollision;
+    [SerializeField] private GameObject fxSmoke;
+    [SerializeField] private GameObject dice;
+
+    [SerializeField] private Vector3 torque;
+    private Rigidbody rb;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -14,12 +19,13 @@ public class DiceMassIncrease : MonoBehaviour
         // Verificar si este dado choca con el otro dado
         if (collision.gameObject.CompareTag("Dice")) // Asegúrate de que los dados tengan la etiqueta "Dice"
         {
-            Rigidbody rb = GetComponent<Rigidbody>();
+             rb = GetComponent<Rigidbody>();
 
             if (rb != null)
             {
                 // Aumentar la masa del dado
                 rb.mass += massIncrease;
+                AddRotation();
                 Debug.Log("Colisión detectada: Masa del dado aumentada.");
             }
         }
@@ -28,6 +34,20 @@ public class DiceMassIncrease : MonoBehaviour
         StartCoroutine(DisableFxAfterTime(2f));
     }
 
+    public void AddRotation()
+    {
+        rb = GetComponent<Rigidbody>();
+
+
+        if (rb != null)
+        {
+           
+            rb.AddTorque(torque*50);
+           
+        }
+
+
+    }
     // Corutina para desactivar el efecto después de un tiempo
     IEnumerator DisableFxAfterTime(float time)
     {
