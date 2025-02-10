@@ -26,12 +26,22 @@ public class DiceMassIncrease : MonoBehaviour
                 // Aumentar la masa del dado
                 rb.mass += massIncrease;
                 AddRotation();
-                Debug.Log("Colisión detectada: Masa del dado aumentada.");
+                //Debug.Log("Colisión detectada: Masa del dado aumentada.");
             }
         }
 
-        // Llamar a la corutina para desactivar el efecto después de 2 segundos
-        StartCoroutine(DisableFxAfterTime(2f));
+
+            // Llamar a la corutina para desactivar el efecto después de 2 segundos
+            StartCoroutine(DisableFxAfterTime(2f));
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.CompareTag("Ground")) // Asegúrate de que los dados tengan la etiqueta "Dice"
+        {
+            fxSmoke.SetActive(true);
+        }
     }
 
     public void AddRotation()

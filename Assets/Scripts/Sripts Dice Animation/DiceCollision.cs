@@ -1,4 +1,6 @@
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DiceCollision : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class DiceCollision : MonoBehaviour
     [SerializeField] private Vector3 torqueD2;
     [SerializeField] private GameObject dice1;
     [SerializeField] private GameObject dice2;
+    [SerializeField] private GameObject fxSmoke;
     [SerializeField] private float minDelay = 0.00f;  // Tiempo mínimo en segundos para el retraso
     [SerializeField] private float maxDelay = 0.60f;  // Tiempo máximo en segundos para el retraso
 
@@ -18,6 +21,16 @@ public class DiceCollision : MonoBehaviour
         // Asignar un tiempo aleatorio entre minDelay y maxDelay antes de lanzar los dados
         float randomDelay = Random.Range(minDelay, maxDelay);
         Invoke("LaunchDice", randomDelay);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            fxSmoke.SetActive(false);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        }
     }
 
     void LaunchDice()
