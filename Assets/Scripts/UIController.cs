@@ -42,9 +42,10 @@ public class UIController : MonoBehaviour
     public void ActivatePanelMovement(bool v)
     {
         panelMovement.SetActive(v);
-        //Soldiers
+        
         if (BoardController.Instance.SquareSelected != -1)
         {
+            //Soldiers
             panelMovement.transform.GetChild(1).GetChild(2).GetComponent<TMP_Text>().text = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier.ToString();
             //Workers
             panelMovement.transform.GetChild(2).GetChild(2).GetComponent<TMP_Text>().text = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker.ToString();
