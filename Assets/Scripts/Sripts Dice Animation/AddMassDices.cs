@@ -7,17 +7,17 @@ public class DiceMassIncrease : MonoBehaviour
     [SerializeField] private GameObject fxCollision;
     [SerializeField] private GameObject fxSmoke;
     [SerializeField] private GameObject dice;
-
     [SerializeField] private Vector3 torque;
+    
     private Rigidbody rb;
-
+    
     void OnCollisionEnter(Collision collision)
     {
         // Activar el efecto visual
         fxCollision.SetActive(true);
 
         // Verificar si este dado choca con el otro dado
-        if (collision.gameObject.CompareTag("Dice")) // Asegúrate de que los dados tengan la etiqueta "Dice"
+        if (collision.gameObject.CompareTag("Dice")) 
         {
              rb = GetComponent<Rigidbody>();
 
@@ -29,34 +29,18 @@ public class DiceMassIncrease : MonoBehaviour
                 //Debug.Log("Colisión detectada: Masa del dado aumentada.");
             }
         }
-
-
-          
+         
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if (other.gameObject.CompareTag("Ground")) // Asegúrate de que los dados tengan la etiqueta "Dice"
-        {
-            fxSmoke.SetActive(true);
-        }
-    }
+   
 
     public void AddRotation()
     {
         rb = GetComponent<Rigidbody>();
 
-
         if (rb != null)
-        {
-           
-            rb.AddTorque(torque*50);
-           
+        {     
+            rb.AddTorque(torque*50);       
         }
-
-
     }
-    // Corutina para desactivar el efecto después de un tiempo
    
 }

@@ -11,8 +11,9 @@ public class DiceCollision : MonoBehaviour
     [SerializeField] private GameObject dice1;
     [SerializeField] private GameObject dice2;
     [SerializeField] private GameObject fxSmoke;
-    [SerializeField] private float minDelay = 0.00f;  // Tiempo mínimo en segundos para el retraso
-    [SerializeField] private float maxDelay = 0.60f;  // Tiempo máximo en segundos para el retraso
+    [SerializeField] private float minDelay = 0.00f;  
+    [SerializeField] private float maxDelay = 0.60f;
+    
 
     private bool hasBeenLaunched = false; // Para evitar múltiples lanzamientos
 
@@ -32,7 +33,7 @@ public class DiceCollision : MonoBehaviour
 
         }
     }
-
+   
     void LaunchDice()
     {
         if (hasBeenLaunched) return; // Evita lanzamientos repetidos
