@@ -31,8 +31,7 @@ public class DiceMassIncrease : MonoBehaviour
         }
 
 
-            // Llamar a la corutina para desactivar el efecto después de 2 segundos
-            StartCoroutine(DisableFxAfterTime(2f));
+          
     }
 
     private void OnTriggerEnter(Collider other)
@@ -59,9 +58,5 @@ public class DiceMassIncrease : MonoBehaviour
 
     }
     // Corutina para desactivar el efecto después de un tiempo
-    IEnumerator DisableFxAfterTime(float time)
-    {
-        yield return new WaitForSeconds(time);  // Espera durante 'time' segundos
-        fxCollision.SetActive(false);           // Desactiva el efecto visual
-    }
+   
 }
