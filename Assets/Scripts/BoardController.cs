@@ -359,10 +359,27 @@ public class BoardController : MonoBehaviour
         }
         else if (sum == 4)
         {
-            qs = 2;
-            qw = 0;
-            qsUI = 0;
-            qwUI = 2;
+            if (qs == 2) // there are 2 soldiers
+            {
+                qs = 2;
+                qw = 0;
+                qsUI = 0;
+                qwUI = 2;
+            }
+            else if (qs==1)
+            {
+                qs = 1;
+                qw = 1;
+                qsUI = 0;
+                qwUI = 2;
+            }
+            else if (qs == 0)
+            {
+                qs = 0;
+                qw = 2;
+                qsUI = 0;
+                qwUI = 2;
+            }
         }
 
       
