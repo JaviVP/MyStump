@@ -49,6 +49,8 @@ public class activateStampide : MonoBehaviour
                 isMoving = false;
                 dadosFinal.SetActive(true);
                 ActivateAnimation();
+                AttackerMeshChanger();
+                DefenderMeshChanger();
                 Debug.Log("Movimiento finalizado");
             }
         }
@@ -145,7 +147,7 @@ public class activateStampide : MonoBehaviour
 
     }
 
-    public void DefendersMeshChanger()
+    public void DefenderMeshChanger()
     {
         if (DiceThrower.Instance.DefenderDiceType() == 0)
         {
@@ -156,13 +158,13 @@ public class activateStampide : MonoBehaviour
                 //Codigos Cambio mesh Caras
                 Debug.Log("Mostrar Calavera mesh");
             }
-            else if (DiceThrower.Instance.RawAttackerSwords() == 1 && DiceThrower.Instance.RawAttackerShields() == 0)
+            else if (DiceThrower.Instance.RawDefenderSwords() == 1 && DiceThrower.Instance.RawDefenderShields() == 0)
             {
                 Debug.Log("Mostrar 1 Lanza mesh");
 
 
             }
-            else if (DiceThrower.Instance.RawAttackerSwords() == 0 && DiceThrower.Instance.RawAttackerShields() == 1)
+            else if (DiceThrower.Instance.RawDefenderSwords() == 0 && DiceThrower.Instance.RawDefenderShields() == 1)
             {
                 Debug.Log("Mostrar 1 Escudo mesh");
 
@@ -170,26 +172,26 @@ public class activateStampide : MonoBehaviour
             }
 
         }
-        else if (DiceThrower.Instance.AttackerDiceType() == 1)
+        else if (DiceThrower.Instance.DefenderDiceType() == 1)
         {
-            if (DiceThrower.Instance.RawAttackerSwords() == 0 && DiceThrower.Instance.RawAttackerShields() == 0)
+            if (DiceThrower.Instance.RawDefenderSwords() == 0 && DiceThrower.Instance.RawDefenderShields() == 0)
             {
                 //Codigos Cambio mesh Caras
                 Debug.Log("Mostrar Calavera mesh");
             }
-            else if (DiceThrower.Instance.RawAttackerSwords() == 1 && DiceThrower.Instance.RawAttackerShields() == 0)
+            else if (DiceThrower.Instance.RawDefenderSwords() == 1 && DiceThrower.Instance.RawDefenderShields() == 0)
             {
                 Debug.Log("Mostrar 1 Lanza mesh");
 
 
             }
-            else if (DiceThrower.Instance.RawAttackerSwords() == 0 && DiceThrower.Instance.RawAttackerShields() == 1)
+            else if (DiceThrower.Instance.RawDefenderSwords() == 0 && DiceThrower.Instance.RawDefenderShields() == 1)
             {
                 Debug.Log("Mostrar 1 Escudo mesh");
 
 
             }
-            else if (DiceThrower.Instance.RawAttackerSwords() == 2 && DiceThrower.Instance.RawAttackerShields() == 2)
+            else if (DiceThrower.Instance.RawDefenderSwords() == 2 && DiceThrower.Instance.RawDefenderShields() == 2)
             {
                 Debug.Log("Mostrar 2 Lanzas mesh");
 
@@ -198,26 +200,26 @@ public class activateStampide : MonoBehaviour
 
 
         }
-        else if (DiceThrower.Instance.AttackerDiceType() == 2)
+        else if (DiceThrower.Instance.DefenderDiceType() == 2)
         {
-            if (DiceThrower.Instance.RawAttackerSwords() == 2 && DiceThrower.Instance.RawAttackerShields() == 0)
+            if (DiceThrower.Instance.RawDefenderSwords() == 2 && DiceThrower.Instance.RawDefenderShields() == 0)
             {
                 //Codigos Cambio mesh Caras
                 Debug.Log("Mostrar 2 Lanzas mesh");
             }
-            else if (DiceThrower.Instance.RawAttackerSwords() == 1 && DiceThrower.Instance.RawAttackerShields() == 0)
+            else if (DiceThrower.Instance.RawDefenderSwords() == 1 && DiceThrower.Instance.RawDefenderShields() == 0)
             {
                 Debug.Log("Mostrar 1 Lanza mesh");
 
 
             }
-            else if (DiceThrower.Instance.RawAttackerSwords() == 0 && DiceThrower.Instance.RawAttackerShields() == 1)
+            else if (DiceThrower.Instance.RawDefenderSwords() == 0 && DiceThrower.Instance.RawDefenderShields() == 1)
             {
                 Debug.Log("Mostrar 1 Escudo mesh");
 
 
             }
-            else if (DiceThrower.Instance.RawAttackerSwords() == 3 && DiceThrower.Instance.RawAttackerShields() == 3)
+            else if (DiceThrower.Instance.RawDefenderSwords() == 3 && DiceThrower.Instance.RawDefenderShields() == 3)
             {
                 Debug.Log("Mostrar 3 Lanzas mesh");
 
