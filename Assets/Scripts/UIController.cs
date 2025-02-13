@@ -160,12 +160,12 @@ public class UIController : MonoBehaviour
     {
         if (actionsRemainingUI != null)
         {
-            Debug.Log("Actualizando UI con acciones: " + MatchController.Instance.ActionsRemaining);
+            //Debug.Log("Actualizando UI con acciones: " + MatchController.Instance.ActionsRemaining);
             actionsRemainingUI.text = MatchController.Instance.ActionsRemaining.ToString();
         }
         else
         {
-            Debug.LogWarning("actionsRemainingUI no está asignado en el Inspector.");
+           // Debug.LogWarning("actionsRemainingUI no está asignado en el Inspector.");
         }
     }
 
