@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AnimationEvent : MonoBehaviour
 {
-    [SerializeField] private activateStampide dice;
+    [SerializeField] private DiceMeshController dice;
 
     public void OnAnimationEnd()
     {

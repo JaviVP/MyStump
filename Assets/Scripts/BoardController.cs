@@ -192,9 +192,12 @@ public class BoardController : MonoBehaviour
             if (MyBoard[i].Faction != null)
             {
                 MyBoard[i].Faction.objectFaction.transform.GetChild(0).gameObject.SetActive(false);
-                if (MyBoard[i].Faction.objectFaction.transform.childCount>1)
+                 if (MyBoard[i].Faction.objectFaction.transform.childCount>1)
                 {
-                    MyBoard[i].Faction.objectFaction.transform.GetChild(1).gameObject.SetActive(false);
+                    MyBoard[i].Faction.objectFaction.transform.GetChild(1).gameObject.GetComponent<TMP_Text>().text = "S:"+ MyBoard[i].Faction.QuantitySoldier+ " W:" + MyBoard[i].Faction.QuantityWorker;
+
+
+                    //MyBoard[i].Faction.objectFaction.transform.GetChild(1).gameObject.SetActive(false);
                 }
 
             }
@@ -272,7 +275,9 @@ public class BoardController : MonoBehaviour
     {
         //Debug.Log("entro");
         Debug.Log("---> " + BoardController.Instance.SquareSelected);
+
         //BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Clics = 0;
+        UIController.Instance.ActivatePanelMovement(false);
         BoardController.Instance.SquareSelected = -1;
         ResetStateSquareColor();
         MarkFactionsTurn();
@@ -327,6 +332,13 @@ public class BoardController : MonoBehaviour
             {
                 qs = 1;
                 qw = 0;
+                qsUI = 0;
+                qwUI = 1;
+            }
+            else if (qs == 0) // there are 1 soldier and 1 worker
+            {
+                qs = 0;
+                qw = 1;
                 qsUI = 0;
                 qwUI = 1;
             }
@@ -417,6 +429,8 @@ public class BoardController : MonoBehaviour
         }
 
         //Update selected Square
+
+        Debug.Log(SquareSelected);
         MyBoard[squareSelected].Faction.QuantitySoldier = qs;
         MyBoard[squareSelected].Faction.QuantityWorker = qw;
         MyBoard[squareSelected].SquareObject.GetComponent<Square>().Faction.QuantitySoldier = qs;

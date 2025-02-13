@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class activateStampide : MonoBehaviour
+public class DiceMeshController : MonoBehaviour
 {
     [SerializeField] private GameObject antStampide;
     [SerializeField] private float velocity;
@@ -8,8 +8,7 @@ public class activateStampide : MonoBehaviour
     [SerializeField] private GameObject dadosFinal;
     [SerializeField] private GameObject dadosI;
     [SerializeField] private GameObject dadosD;
-    [SerializeField] private float velocidadRotacion = 100f;
-    [SerializeField] private float tiempoDeRotacion = 3f; // Tiempo en segundos que el dado rota
+    
     private float tiempoRestante;
     private float stampideTimeLeft;
 
@@ -20,7 +19,7 @@ public class activateStampide : MonoBehaviour
     private void Start()
     {
         stampideTimeLeft = stampideTime;
-        tiempoRestante = tiempoDeRotacion;
+      
         animator = dadosFinal.GetComponent<Animator>();
     }
 
@@ -59,7 +58,6 @@ public class activateStampide : MonoBehaviour
 
     private void ActivateAnimation()
     {
-        // Asegúrate de que el Animator tiene un Trigger configurado en el controlador de animación
         animator.SetTrigger("FinalizarMovimiento"); // "FinalizarMovimiento" es el nombre del Trigger en el Animator
     }
 
@@ -193,7 +191,7 @@ public class activateStampide : MonoBehaviour
             }
             else if (DiceThrower.Instance.RawDefenderSwords() == 2 && DiceThrower.Instance.RawDefenderShields() == 2)
             {
-                Debug.Log("Mostrar 2 Lanzas mesh");
+                Debug.Log("Mostrar 2 Escudos mesh");
 
 
             }
@@ -221,7 +219,7 @@ public class activateStampide : MonoBehaviour
             }
             else if (DiceThrower.Instance.RawDefenderSwords() == 3 && DiceThrower.Instance.RawDefenderShields() == 3)
             {
-                Debug.Log("Mostrar 3 Lanzas mesh");
+                Debug.Log("Mostrar 3 Escudos mesh");
 
 
             }
@@ -233,6 +231,5 @@ public class activateStampide : MonoBehaviour
 
 
     }
-
    
 }
