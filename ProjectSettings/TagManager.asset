@@ -11,6 +11,7 @@ TagManager:
   - UnSelected
   - Dice
   - Ground
+  - Stampide
   layers:
   - Default
   - TransparentFX

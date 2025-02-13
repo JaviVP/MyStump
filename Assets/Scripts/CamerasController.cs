@@ -54,7 +54,7 @@ public class CamerasController : MonoBehaviour
         initialPositionTop = topDownCamera.transform.position;
         initialRotationTop = topDownCamera.transform.rotation;
 
-        topDownCamera.transform.rotation = Quaternion.Euler(90, 0, 90);
+        //topDownCamera.transform.rotation = Quaternion.Euler(90, 0, 180);
 
         // Comienza solo con la cámara 1 activa
         ActivateCamera(camera1);
@@ -69,19 +69,21 @@ public class CamerasController : MonoBehaviour
     void Update()
     {
         // Cambiar entre las cámaras en perspectiva con la tecla de espacio
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
             if (activeCamera == camera1)
             {
                 ActivateCamera(camera2);
-                topDownCamera.transform.rotation = Quaternion.Euler(90, 0, -90);
+                topDownCamera.transform.rotation = Quaternion.Euler(90, 0, 180);
             }
             else if (activeCamera == camera2)
             {
                 ActivateCamera(camera1);
-                topDownCamera.transform.rotation = Quaternion.Euler(90, 0, 90);
+                topDownCamera.transform.rotation = Quaternion.Euler(90, 0, -180);
             }
         }
+        */
+        //Debug para cambiar camaras
         /*
         if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
@@ -96,7 +98,7 @@ public class CamerasController : MonoBehaviour
         CheckTopDownCamera();
     }
 
-    void ActivateCamera(CinemachineCamera newCamera)
+    public void ActivateCamera(CinemachineCamera newCamera)
     {
         // Si la cámara ya está activa, no hacer nada
         if (activeCamera == newCamera) return;
@@ -119,7 +121,7 @@ public class CamerasController : MonoBehaviour
         }
     }
 
-    void CheckTopDownCamera()
+    public void CheckTopDownCamera()
     {
         if (activeCamera == null) return;
 
@@ -169,15 +171,16 @@ public class CamerasController : MonoBehaviour
        
             if (activeCamera == camera1)
             {
-
+                Debug.Log("Activo Cenital p1");
                 ActivateCamera(camera2);
-                topDownCamera.transform.rotation = Quaternion.Euler(90, 0, -90);
+                topDownCamera.transform.rotation = Quaternion.Euler(90, 0, 0);
             }
             else if (activeCamera == camera2)
             {
-
+                Debug.Log("Activo Cenital p2");
+           
                 ActivateCamera(camera1);
-                topDownCamera.transform.rotation = Quaternion.Euler(90, 0, 90);
+                topDownCamera.transform.rotation = Quaternion.Euler(90, 0, 180);
             }
 
     }
