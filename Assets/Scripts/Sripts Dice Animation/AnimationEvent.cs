@@ -6,7 +6,7 @@ public class AnimationEvent : MonoBehaviour
 
     public void OnAnimationEnd()
     {
-        //dice.MeshChanger();
+        
         Debug.Log("Acaba animacion");
 
     }

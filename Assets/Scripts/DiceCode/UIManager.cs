@@ -8,6 +8,8 @@ public class BattleTesterUI : MonoBehaviour
     public TMP_InputField defenderWorkersInput;
     public TMP_InputField defenderSoldiersInput;
     public TMP_Text resultText;
+    [SerializeField] private GameObject ActivateCombat;
+    [SerializeField] private GameObject Canvas;
 
     private BattleResolver battleResolver;
 
@@ -21,6 +23,8 @@ public class BattleTesterUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SimulateBattle();
+            ActivateCombat.SetActive(true);
+            Canvas.SetActive(false);
         }
     }
 
