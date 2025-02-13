@@ -22,6 +22,8 @@ public class CamerasController : MonoBehaviour
     private float lastTapTime = 0f;
     private float doubleTapThreshold = 0.3f;
 
+    private float currentZoom;
+
     private Vector3 initialPosition1, initialPosition2, initialPositionTop;
     private Quaternion initialRotation1, initialRotation2, initialRotationTop;
 
@@ -44,6 +46,8 @@ public class CamerasController : MonoBehaviour
     }
     void Start()
     {
+
+       
         // Guardar posición y rotación inicial de las cámaras
         initialPosition1 = camera1.transform.position;
         initialRotation1 = camera1.transform.rotation;
@@ -57,7 +61,7 @@ public class CamerasController : MonoBehaviour
         //topDownCamera.transform.rotation = Quaternion.Euler(90, 0, 180);
 
         // Comienza solo con la cámara 1 activa
-        ActivateCamera(camera1);
+        //ActivateCamera(camera1);
 
         // Asignar el evento del botón de reset
         if (resetButton != null)
@@ -125,7 +129,7 @@ public class CamerasController : MonoBehaviour
     {
         if (activeCamera == null) return;
 
-        float currentZoom = activeCamera.Lens.FieldOfView;
+        currentZoom = activeCamera.Lens.FieldOfView;
 
         // Si la cámara activa es una cámara en perspectiva y el zoom alcanza el umbral de perspectiva, cambia a la cámara cenital
         if (activeCamera != topDownCamera && currentZoom == perspectiveThreshold && !isTopDownActive && !zoomingToTopDown)

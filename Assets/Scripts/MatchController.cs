@@ -24,7 +24,7 @@ public class MatchController : MonoBehaviour
     private TypeOfPlayers typePlayerTurn;
     private TypeofTroops typeTroops;
     private int turn = 0;
-    private int actionsPerTurn = 3;
+    private int actionsPerTurn = 100;
     private int actionsRemaining;
     private int numPlayers = 2;
 
