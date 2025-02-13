@@ -148,47 +148,6 @@ public class DiceThrower : MonoBehaviour
             }
         }
 
-   
-
-        /*
-
-        // If both swords and shields exist, keep the relevant one
-        if (swords > 0 && shields > 0)
-        {
-            if (isAttacker)
-                shields = 0; // Attackers only use swords
-            else
-                swords = 0; // Defenders only use shields
-        }
-
-        
-        // Apply soldier bonus
-        swords += soldiers;
-        shields += soldiers;
-
-        // Apply special rule if initial result was 0
-        if (roll.shields == 0 && roll.swords == 0)
-        {
-            if (isAttacker)
-            {
-                swords += soldiers;
-            }
-            else
-            {
-                shields += soldiers;
-            }
-             // If attacker rolled 0, boost swords
-        }
-
-        if (isAttacker && swords > 0)
-        {
-            swords += soldiers;
-        }
-        if (!isAttacker && shields > 0)
-        {
-            shields += soldiers;
-        }
-        */
 
         return new DiceFace
         {
