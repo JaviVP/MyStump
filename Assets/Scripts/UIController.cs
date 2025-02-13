@@ -43,13 +43,7 @@ public class UIController : MonoBehaviour
     {
         panelMovement.SetActive(v);
         
-        if (BoardController.Instance.SquareSelected != -1)
-        {
-            //Soldiers
-            panelMovement.transform.GetChild(1).GetChild(2).GetComponent<TMP_Text>().text = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier.ToString();
-            //Workers
-            panelMovement.transform.GetChild(2).GetChild(2).GetComponent<TMP_Text>().text = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker.ToString();
-        }
+       
     }
 
 
@@ -146,10 +140,7 @@ public class UIController : MonoBehaviour
     public void MovingActionButton()
     {
 
-        Debug.Log("UIQW: " + GetQuantityWorkersMovingUI());
-        panelMovement.transform.GetChild(2).GetChild(0).gameObject.SetActive(false);
-        panelMovement.transform.GetChild(2).GetChild(0).gameObject.SetActive(false);
-
+        Debug.Log("SelectedUI:" + BoardController.Instance.SquareSelected);
         MatchController.TypeOfPlayers type;
         if ((int)MatchController.TypeOfPlayers.Ant == MatchController.Instance.Turn)
         {
@@ -159,6 +150,8 @@ public class UIController : MonoBehaviour
         {
             type = MatchController.TypeOfPlayers.Termite;
         }
+
+
         BoardController.Instance.ActionMovingToEmptySquare(BoardController.Instance.LastClickedSquare, type);
         ActivatePanelMovement(false);
     }

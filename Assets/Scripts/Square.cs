@@ -93,7 +93,7 @@ public class Square : MonoBehaviour
         BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].state = BoardController.SquareState.Empty;
         BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].squareObject.GetComponent<Square>().state = BoardController.SquareState.Empty;
         //Moved and deselected
-        BoardController.Instance.SquareSelected = -1;
+        BoardController.Instance.SquareSelected = -4;
         BoardController.Instance.ResetStateSquareColor();
         BoardController.Instance.MarkFactionsTurn();
     }
@@ -106,11 +106,11 @@ public class Square : MonoBehaviour
         GetComponent<MeshCollider>().enabled = false;
 
      
-        if (GetComponent<Square>().State == BoardController.SquareState.Ant && BoardController.Instance.SquareSelected == -1)
+        if (GetComponent<Square>().State == BoardController.SquareState.Ant && BoardController.Instance.SquareSelected <=0)
         {
                 Debug.Log("Posicion: "+ this.id);
                 BoardController.Instance.SquareSelected = this.id;
-                Debug.Log("Soy una hormiga");
+                Debug.Log("Soy una hormiga ID:" + BoardController.Instance.SquareSelected);
                 BoardController.Instance.ResetStateSquareColor();
                 // Cambiar color de las casillas adyacentes
                 //squareAdjacents.HighlightAllAdjacents(Color.yellow);
@@ -129,7 +129,7 @@ public class Square : MonoBehaviour
 
 
         }
-        else if (GetComponent<Square>().State == BoardController.SquareState.Termite && BoardController.Instance.SquareSelected ==-1)
+        else if (GetComponent<Square>().State == BoardController.SquareState.Termite && BoardController.Instance.SquareSelected <=0)
         {
             Debug.Log("Posicion: " + this.id);
             BoardController.Instance.SquareSelected = this.id;
@@ -155,15 +155,17 @@ public class Square : MonoBehaviour
             if (GetComponent<Square>().State == BoardController.SquareState.Empty)
             {
 
-                Debug.Log("Moving a empty square");
+                Debug.Log("Moving a empty square SELECTED: "+ BoardController.Instance.SquareSelected);
+
                 int sum = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier + BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
                 Debug.Log("la suma es: " + sum);
                 if (sum>1)
                 {
-                    
+                   
                     clics++;
                     if (clics==1)
                     {
+                        Debug.Log("entro aqui 1111");
                         BoardController.Instance.LastClickedSquare = this.id;
                         UIController.Instance.ActivatePanelMovement(true);
                         BoardController.Instance.ResetStateSquareColor();
@@ -174,6 +176,7 @@ public class Square : MonoBehaviour
                     }
                     else
                     {
+                        Debug.Log("entro aqui 2222");
                         MovingFaction();
                         UIController.Instance.ActivatePanelMovement(false);
                         clics =0;
@@ -208,7 +211,7 @@ public class Square : MonoBehaviour
                 BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].state = BoardController.SquareState.Empty;
                 BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].squareObject.GetComponent<Square>().state = BoardController.SquareState.Empty;
                 //Moved and deselected
-                BoardController.Instance.SquareSelected = -1;
+                BoardController.Instance.SquareSelected = -6;
                 BoardController.Instance.ResetStateSquareColor();
                 BoardController.Instance.MarkFactionsTurn();
                 clics = 0;

@@ -57,8 +57,8 @@ public class LogicController : MonoBehaviour
         
         dice1Split = resultDice1.Split(" ");
         dice2Split = resultDice2.Split(" ");
-        Debug.Log(dice1Split[0] + "-" + dice1Split[1]);
-        Debug.Log(dice2Split[0] + "-" + dice2Split[1]);
+        //Debug.Log(dice1Split[0] + "-" + dice1Split[1]);
+        //Debug.Log(dice2Split[0] + "-" + dice2Split[1]);
         dice1Qty = int.Parse(dice1Split[0]);
         dice2Qty = int.Parse(dice2Split[0]);
 
