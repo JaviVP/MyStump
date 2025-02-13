@@ -10,11 +10,12 @@ public class DiceCollision : MonoBehaviour
     [SerializeField] private Vector3 torqueD2;
     [SerializeField] private GameObject dice1;
     [SerializeField] private GameObject dice2;
-    [SerializeField] private GameObject fxSmoke;
+    
     [SerializeField] private float minDelay = 0.00f;  
     [SerializeField] private float maxDelay = 0.60f;
-    
 
+    private Rigidbody rb1;
+    private Rigidbody rb2;
     private bool hasBeenLaunched = false; // Para evitar múltiples lanzamientos
 
     void Start()
@@ -22,13 +23,15 @@ public class DiceCollision : MonoBehaviour
         // Asignar un tiempo aleatorio entre minDelay y maxDelay antes de lanzar los dados
         float randomDelay = Random.Range(minDelay, maxDelay);
         Invoke("LaunchDice", randomDelay);
+        rb1 = dice1.GetComponent<Rigidbody>();
+        rb2 = dice2.GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            fxSmoke.SetActive(false);
+            Debug.Log("Reset");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         }
@@ -36,10 +39,7 @@ public class DiceCollision : MonoBehaviour
    
     void LaunchDice()
     {
-        if (hasBeenLaunched) return; // Evita lanzamientos repetidos
-
-        Rigidbody rb1 = dice1.GetComponent<Rigidbody>();
-        Rigidbody rb2 = dice2.GetComponent<Rigidbody>();
+        if (hasBeenLaunched) return; // Evita lanzamientos repetidos 
 
         if (rb1 != null && rb2 != null)
         {
@@ -52,4 +52,6 @@ public class DiceCollision : MonoBehaviour
 
         hasBeenLaunched = true;
     }
+
+
 }

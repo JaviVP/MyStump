@@ -63,6 +63,7 @@ public class MatchController : MonoBehaviour
         typePlayer = (TypeOfPlayers) 1;
         Debug.Log(typePlayer.ToString() + " -- " + (int)typePlayer);*/
     }
+
     public void ChangeTurn()
     {
         CamerasController.Instance.SwitchCamera();

@@ -5,12 +5,12 @@ public class DiceMassIncrease : MonoBehaviour
 {
     [SerializeField] private float massIncrease = 0.5f; // Cantidad de masa que se suma en cada colisión
     [SerializeField] private GameObject fxCollision;
-    [SerializeField] private GameObject fxSmoke;
     [SerializeField] private GameObject dice;
     [SerializeField] private Vector3 torque;
-    
+    [SerializeField] private Vector3 pD1;
+
     private Rigidbody rb;
-    
+
     void OnCollisionEnter(Collision collision)
     {
         // Activar el efecto visual
@@ -29,7 +29,16 @@ public class DiceMassIncrease : MonoBehaviour
                 //Debug.Log("Colisión detectada: Masa del dado aumentada.");
             }
         }
-         
+
+       
+        if (collision.gameObject.CompareTag("Stampide"))
+        {
+                rb.AddForce(pD1 * 20);
+
+                Debug.Log("Sumamos colision");
+        }
+      
+
     }
    
 
