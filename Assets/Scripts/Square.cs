@@ -78,8 +78,13 @@ public class Square : MonoBehaviour
     public void MovingFaction()
     {
         BoardController.Instance.MyBoard[this.id].Faction = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction;
+        BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.objectFaction.transform.SetParent(BoardController.Instance.MyBoard[this.id].SquareObject.transform);
+
         BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction = null;
         BoardController.Instance.MyBoard[this.id].Faction.objectFaction.transform.position = BoardController.Instance.MyBoard[this.id].SquareObject.transform.position + new Vector3(0, 1, 0);
+
+        Debug.Log("Selected:" + BoardController.Instance.SquareSelected);
+        
 
         //Current turn
         if (MatchController.Instance.Turn == (int)MatchController.TypeOfPlayers.Termite)
@@ -210,7 +215,8 @@ public class Square : MonoBehaviour
                 Debug.Log("Agrupooo");
 
 
-               
+                //Error: check max soldiers =2, max workes= 4  (max sum=4)
+
                 BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker += BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
                 BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier += BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier;
                 Destroy(BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.objectFaction);

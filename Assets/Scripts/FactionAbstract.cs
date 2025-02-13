@@ -6,7 +6,9 @@ public abstract class FactionAbstract
 
 
     public GameObject objectFaction;
+    [SerializeField]
     private int quantitySoldier;
+    [SerializeField]
     private int quantityWorker;
     private MatchController.TypeOfPlayers type;
 

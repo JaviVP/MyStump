@@ -42,8 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 13
-  m_BakeOnSceneLoad: 0
+  serializedVersion: 12
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -3968,6 +3967,10 @@ MonoBehaviour:
   - {fileID: 1007106528}
   - {fileID: 1940099056}
   - {fileID: 899700473}
+  initialQuantityAntSoldier: 0100000001000000010000000100000001000000
+  initialQuantityAntWorker: 0100000001000000010000000100000001000000
+  initialQuantityTermitesSoldier: 02000000020000000200000002000000
+  initialQuantityTermitesWorker: 02000000010000000000000002000000
   playersColor:
   - {r: 1, g: 0.9723208, b: 0, a: 0}
   - {r: 0.990566, g: 0, b: 0.010119384, a: 0}
@@ -6666,8 +6669,6 @@ MonoBehaviour:
   dadosFinal: {fileID: 979035477}
   dadosI: {fileID: 647350419}
   dadosD: {fileID: 758526062}
-  velocidadRotacion: 1000
-  tiempoDeRotacion: 3
 --- !u!1001 &592667726
 PrefabInstance:
   m_ObjectHideFlags: 0
