@@ -28,13 +28,43 @@ public class DiceThrower : MonoBehaviour
     // External modifier system ---> to change
     //public Func<int, int> ModifyResult = (x) => x;  // Default: No modification
 
+    public static DiceThrower Instance { get; private set; }
+
+
+    private void Awake()
+    {
+        // If there is an instance, and it's not me, delete myself.
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
+
+    DiceFace rawAttackerRoll;
+    DiceFace rawDefenderRoll;
+
+    Dice attackerDice;
+    Dice defenderDice;
+
+    int attackerDiceNum;
+    int defenderDiceNum;
     public (DiceFace AttackerResult, DiceFace DefenderResult) RollDice(int attackerWorkers, int attackerSoldiers, int defenderWorkers, int defenderSoldiers)
     {
-        Dice attackerDice = GetDiceType(attackerWorkers + attackerSoldiers);
-        Dice defenderDice = GetDiceType(defenderWorkers + defenderSoldiers);
+        attackerDice = GetDiceType(attackerWorkers + attackerSoldiers);
+        attackerDiceNum = Mathf.FloorToInt(Mathf.Log(attackerWorkers + attackerSoldiers, 2));
+        defenderDice = GetDiceType(defenderWorkers + defenderSoldiers);
+        defenderDiceNum = Mathf.FloorToInt(Mathf.Log(defenderWorkers + defenderSoldiers, 2));
 
-        DiceFace rawAttackerRoll = attackerDice.Roll();
-        DiceFace rawDefenderRoll = defenderDice.Roll();
+        rawAttackerRoll = attackerDice.Roll();
+        rawDefenderRoll = defenderDice.Roll();
+
+      
 
         DiceFace finalAttackerRoll = ApplyBonuses(rawAttackerRoll, attackerSoldiers, isAttacker: true);
         DiceFace finalDefenderRoll = ApplyBonuses(rawDefenderRoll, defenderSoldiers, isAttacker: false);
@@ -118,6 +148,7 @@ public class DiceThrower : MonoBehaviour
             }
         }
 
+   
 
         /*
 
@@ -164,5 +195,46 @@ public class DiceThrower : MonoBehaviour
             swords = swords,
             shields = shields
         };
+    }
+
+
+    public int RawAttackerSwords()
+    {
+
+        return rawAttackerRoll.swords;
+
+    }
+    public int RawAttackerShields()
+    {
+
+        return rawAttackerRoll.shields;
+
+    }
+    public int RawDefenderSwords()
+    {
+
+        return rawDefenderRoll.swords;
+
+    }
+    public int RawDefenderShields()
+    {
+
+        return rawDefenderRoll.shields;
+
+    }
+
+    public int AttackerDiceType()
+    {
+
+        return attackerDiceNum;
+        
+
+    }
+
+    public int DefenderDiceType()
+    {
+
+        return defenderDiceNum;
+
     }
 }
