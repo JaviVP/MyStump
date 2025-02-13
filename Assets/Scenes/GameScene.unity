@@ -4750,9 +4750,9 @@ RectTransform:
   - {fileID: 353684996}
   m_Father: {fileID: 414406755}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -381, y: -322}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 131, y: 72}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &365498761
@@ -9094,7 +9094,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -9118,7 +9118,7 @@ Transform:
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 65.3, z: -13.6}
+  m_LocalPosition: {x: 0, y: 195.3, z: -13.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9645,13 +9645,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 761954946}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.46741137, y: -0, z: -0, w: 0.88403994}
-  m_LocalPosition: {x: -178.81903, y: 60.72594, z: 62.48546}
+  m_LocalRotation: {x: 0.43954688, y: -0, z: -0, w: 0.89821965}
+  m_LocalPosition: {x: -178.81903, y: 62, z: 61.619995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1835456226}
-  m_LocalEulerAnglesHint: {x: 55.733, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 52.15, y: 0, z: 0}
 --- !u!81 &761954948
 AudioListener:
   m_ObjectHideFlags: 0
@@ -9701,7 +9701,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: c20870be15c292041b66b5b29daace3c, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -19044,7 +19044,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 126
   m_CollisionDetection: 2
 --- !u!65 &1538757226
 BoxCollider:
@@ -22300,7 +22300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1835456226
 Transform:
   m_ObjectHideFlags: 0
@@ -22797,7 +22797,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1887950655
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22807,7 +22807,7 @@ RectTransform:
   m_GameObject: {fileID: 1887950654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.329377, y: 3.6589313, z: 1.1237}
+  m_LocalScale: {x: 0.39643636, y: 0.39643636, z: 0.39643636}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 414406755}
@@ -22815,7 +22815,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1887950656
 MonoBehaviour:
@@ -22837,7 +22837,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 8400000, guid: c20870be15c292041b66b5b29daace3c, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0

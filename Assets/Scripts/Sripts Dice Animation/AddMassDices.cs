@@ -33,7 +33,7 @@ public class DiceMassIncrease : MonoBehaviour
        
         if (collision.gameObject.CompareTag("Stampide"))
         {
-                rb.AddForce(pD1 * 20);
+                rb.AddForce(pD1 * 50);
 
                 Debug.Log("Sumamos colision");
         }
