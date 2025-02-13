@@ -110,8 +110,15 @@ public class Square : MonoBehaviour
         {
                 Debug.Log("Posicion: "+ this.id);
                 BoardController.Instance.SquareSelected = this.id;
-                Debug.Log("Soy una hormiga ID:" + BoardController.Instance.SquareSelected);
-                BoardController.Instance.ResetStateSquareColor();
+            //Debug.Log("Soy una hormiga ID:" + BoardController.Instance.SquareSelected);
+            BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].SquareObject.GetComponent<MeshCollider>().enabled = false;
+
+
+
+            BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.objectFaction.transform.GetChild(1).gameObject.SetActive(true);
+
+
+            BoardController.Instance.ResetStateSquareColor();
                 // Cambiar color de las casillas adyacentes
                 //squareAdjacents.HighlightAllAdjacents(Color.yellow);
                 if (meshRenderer != null)
@@ -155,7 +162,7 @@ public class Square : MonoBehaviour
             if (GetComponent<Square>().State == BoardController.SquareState.Empty)
             {
 
-                Debug.Log("Moving a empty square SELECTED: "+ BoardController.Instance.SquareSelected);
+              //  Debug.Log("Moving a empty square SELECTED: "+ BoardController.Instance.SquareSelected);
 
                 int sum = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier + BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
                 Debug.Log("la suma es: " + sum);
@@ -165,7 +172,7 @@ public class Square : MonoBehaviour
                     clics++;
                     if (clics==1)
                     {
-                        Debug.Log("entro aqui 1111");
+                       
                         BoardController.Instance.LastClickedSquare = this.id;
                         UIController.Instance.ActivatePanelMovement(true);
                         BoardController.Instance.ResetStateSquareColor();
@@ -176,7 +183,7 @@ public class Square : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("entro aqui 2222");
+                       
                         MovingFaction();
                         UIController.Instance.ActivatePanelMovement(false);
                         clics =0;
@@ -220,6 +227,12 @@ public class Square : MonoBehaviour
             else if ((int)GetComponent<Square>().State != (int)MatchController.Instance.Turn)
             {
                 Debug.Log("Ataco");
+
+                //BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker  = Quantity of defenders Workers
+                //BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier  = Quantity of defenders Soldier
+
+                //BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier  = Quantity of attack Soldier
+                //BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker  = Quantity of attack Worker
 
 
                 /*Debug.Log(GetComponent<Square>().State.ToString() + "---" + (int)MatchController.Instance.Turn);

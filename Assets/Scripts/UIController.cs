@@ -180,7 +180,7 @@ public class UIController : MonoBehaviour
             turnPlayerInfoUI.text = "Ants";
         }
 
-        Debug.Log("Turn UI updated: " + turnPlayerInfoUI.text);
+        //Debug.Log("Turn UI updated: " + turnPlayerInfoUI.text);
     }
 
 

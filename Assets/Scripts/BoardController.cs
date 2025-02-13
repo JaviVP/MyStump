@@ -85,7 +85,7 @@ public class BoardController : MonoBehaviour
             for (int i = 0; i < initialListAnts.Count; i++)
             {
                 AntGroup antG = new AntGroup();
-                antG.QuantitySoldier = 3;
+                antG.QuantitySoldier = 2;
                 antG.QuantityWorker = 2;
                 antG.Type = MatchController.TypeOfPlayers.Ant;
                 antG.objectFaction = (GameObject)Instantiate(antObject, initialListAnts[i].transform.position + new Vector3(0, 1, 0), Quaternion.identity);
@@ -113,12 +113,12 @@ public class BoardController : MonoBehaviour
                 termiteG.Type = MatchController.TypeOfPlayers.Termite;
                 termiteG.objectFaction = (GameObject)Instantiate(termiteObject, initialListTermites[i].transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                 // initialListTermites[i].Faction = termiteG;
-                termiteG.objectFaction.transform.SetParent(MyBoard[initialListAnts[i].Id].SquareObject.transform);
-
+                termiteG.objectFaction.transform.SetParent(MyBoard[initialListTermites[i].Id].SquareObject.transform);
+                
                 MyBoard[initialListTermites[i].Id].Faction = termiteG;
-                MyBoard[initialListAnts[i].Id].SquareObject.GetComponent<Square>().Faction = termiteG;
-                MyBoard[initialListAnts[i].Id].State = BoardController.SquareState.Termite;
-                MyBoard[initialListAnts[i].Id].SquareObject.GetComponent<Square>().State = BoardController.SquareState.Termite;
+                MyBoard[initialListTermites[i].Id].SquareObject.GetComponent<Square>().Faction = termiteG;
+                MyBoard[initialListTermites[i].Id].State = BoardController.SquareState.Termite;
+                MyBoard[initialListTermites[i].Id].SquareObject.GetComponent<Square>().State = BoardController.SquareState.Termite;
             }
 
         }
@@ -192,6 +192,10 @@ public class BoardController : MonoBehaviour
             if (MyBoard[i].Faction != null)
             {
                 MyBoard[i].Faction.objectFaction.transform.GetChild(0).gameObject.SetActive(false);
+                if (MyBoard[i].Faction.objectFaction.transform.childCount>1)
+                {
+                    MyBoard[i].Faction.objectFaction.transform.GetChild(1).gameObject.SetActive(false);
+                }
 
             }
             else
@@ -267,7 +271,9 @@ public class BoardController : MonoBehaviour
     public void UnSelected()
     {
         //Debug.Log("entro");
-        //BoardController.Instance.SquareSelected = -1;
+        Debug.Log("---> " + BoardController.Instance.SquareSelected);
+        //BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Clics = 0;
+        BoardController.Instance.SquareSelected = -1;
         ResetStateSquareColor();
         MarkFactionsTurn();
     }
@@ -337,17 +343,17 @@ public class BoardController : MonoBehaviour
             }
             else if (qs == 2) // there are 2 soldiers
             {
-                qs = 1;
-                qw = 1;
-                qsUI = 1;
-                qwUI = 0;
+                qs = 2;
+                qw = 0;
+                qsUI = 0;
+                qwUI = 1;
             }
             else if (qs == 1) // there are 1 soldiers
             {
                 qs = 1;
-                qw = 0;
+                qw = 1;
                 qsUI = 0;
-                qwUI = 2;
+                qwUI = 1;
             }
 
         }
