@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-
+using System;
 
 [System.Serializable]
 public class Dice
@@ -10,7 +10,7 @@ public class Dice
 
     public DiceFace Roll()
     {
-        return faces[Random.Range(0, faces.Count)];
+        return faces[UnityEngine.Random.Range(0, faces.Count)];
     }
 }
 
@@ -21,53 +21,110 @@ public class DiceFace
     public int shields;
 }
 
-
-
-
 public class DiceThrower : MonoBehaviour
 {
     public List<Dice> availableDice;
 
-    private Dice attackerDice;
-    private Dice defenderDice;
-    private DiceFace attackerRoll;
-    private DiceFace defenderRoll;
+    // External modifier system ---> to change
+    //public Func<int, int> ModifyResult = (x) => x;  // Default: No modification
 
     public (DiceFace AttackerResult, DiceFace DefenderResult) RollDice(int attackerWorkers, int attackerSoldiers, int defenderWorkers, int defenderSoldiers)
     {
-        attackerDice = GetDiceType(attackerWorkers + attackerSoldiers);
-        defenderDice = GetDiceType(defenderWorkers + defenderSoldiers);
+        Dice attackerDice = GetDiceType(attackerWorkers + attackerSoldiers);
+        Dice defenderDice = GetDiceType(defenderWorkers + defenderSoldiers);
 
-        attackerRoll = attackerDice.Roll();
-        defenderRoll = defenderDice.Roll();
+        DiceFace rawAttackerRoll = attackerDice.Roll();
+        DiceFace rawDefenderRoll = defenderDice.Roll();
 
-        //Consola
-        Debug.Log($"Attacker rolled: {attackerRoll.swords} swords, {attackerRoll.shields} shields.");
-        Debug.Log($"Defender rolled: {defenderRoll.swords} swords, {defenderRoll.shields} shields.");
+        DiceFace finalAttackerRoll = ApplyBonuses(rawAttackerRoll, attackerSoldiers, isAttacker: true);
+        DiceFace finalDefenderRoll = ApplyBonuses(rawDefenderRoll, defenderSoldiers, isAttacker: false);
 
-        //FindFirstObjectByType<BattleResolver>().ResolveBattle(attackerRoll, defenderRoll, attackerWorkers, attackerSoldiers, defenderWorkers, defenderSoldiers);
-        return (attackerRoll,defenderRoll);
+        // Apply external modifications (e.g., event cards) ---> previous to change
+        //finalAttackerRoll.swords = ModifyResult(finalAttackerRoll.swords);
+        //finalAttackerRoll.shields = ModifyResult(finalAttackerRoll.shields);
+        //finalDefenderRoll.swords = ModifyResult(finalDefenderRoll.swords);
+        //finalDefenderRoll.shields = ModifyResult(finalDefenderRoll.shields);
+
+        // Console logs for debugging
+        Debug.Log($"Attacker rolled: {rawAttackerRoll.swords} swords, {rawAttackerRoll.shields} shields. Final: {finalAttackerRoll.swords} swords, {finalAttackerRoll.shields} shields");
+        Debug.Log($"Defender rolled: {rawDefenderRoll.swords} swords, {rawDefenderRoll.shields} shields. Final: {finalDefenderRoll.swords} swords, {finalDefenderRoll.shields} shields");
+
+        return (finalAttackerRoll, finalDefenderRoll);
     }
 
-
+   
+    /// TODO ---> implement external bonuses system
+    
     /*
-    private Dice GetDiceForTroops(int troopCount)
+    public (DiceFace attacker, DiceFace defender) ModifyResults(DiceFace attackerFace, DiceFace defenderFace, int attSwordMod, int attShieldMod, int defSwordMod, int defShieldMod)
     {
-        if (troopCount < 2) return availableDice[0];
-        else if (troopCount < 4) return availableDice[1];
-        else return availableDice[2];
+        DiceFace modifiedAttacker = new DiceFace
+        {
+            swords = attackerFace.swords + attSwordMod,
+            shields = attackerFace.shields + attShieldMod
+        };
+
+        DiceFace modifiedDefender = new DiceFace
+        {
+            swords = defenderFace.swords + defSwordMod,
+            shields = defenderFace.shields + defShieldMod
+        };
+
+        return (modifiedAttacker, modifiedDefender);
     }
     */
 
-    // Mas escalable que lo de arriba ↑↑↑, pero usa mas recursos. Si se necesita se quita lo de abajo
-
     private Dice GetDiceType(int troopCount)
     {
-        return availableDice[ Mathf.FloorToInt(Mathf.Log(troopCount, 2)) + 1];
+        return availableDice[Mathf.FloorToInt(Mathf.Log(troopCount, 2))];
     }
 
+    private DiceFace ApplyBonuses(DiceFace roll, int soldiers, bool isAttacker)
+    {
+        int swords = roll.swords;
+        int shields = roll.shields;
+
+        // If both swords and shields exist, keep the relevant one
+        if (swords > 0 && shields > 0)
+        {
+            if (isAttacker)
+                shields = 0; // Attackers only use swords
+            else
+                swords = 0; // Defenders only use shields
+        }
+
+        // Apply soldier bonus
+        swords += soldiers;
+        shields += soldiers;
+
+        // Apply special rule if initial result was 0
+        if (roll.shields == 0 && roll.swords == 0)
+        {
+            if (isAttacker)
+            {
+                swords += soldiers;
+            }
+            else
+            {
+                shields += soldiers;
+            }
+             // If attacker rolled 0, boost swords
+        }
+
+        if (isAttacker && swords > 0)
+        {
+            swords += soldiers;
+        }
+        if (!isAttacker && shields > 0)
+        {
+            shields += soldiers;
+        }
 
 
+        return new DiceFace
+        {
+            swords = swords,
+            shields = shields
+        };
+    }
 }
-
-
