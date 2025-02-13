@@ -231,6 +231,7 @@ public class Square : MonoBehaviour
                 int currentAttackerSoldiers = BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier;
                 int currentDefenderWorkers = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
                 int currentDefenderSoldiers = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier;
+               // Debug.Log("")
 
 
                 Debug.Log("Ataco");
