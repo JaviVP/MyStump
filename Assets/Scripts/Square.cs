@@ -13,6 +13,7 @@ public class Square : MonoBehaviour
     private MeshRenderer meshRenderer;
     private int clics;
     private FactionAbstract faction;
+    private BattleResolver battleResolver;
     [SerializeField]
     private BoardController.SquareState state;
     /*[SerializeField] 
@@ -29,7 +30,7 @@ public class Square : MonoBehaviour
         clics = 0;
         //Cambiar de color el objeto
         meshRenderer = GetComponent<MeshRenderer>();
-
+        battleResolver = FindFirstObjectByType<BattleResolver>();
         //Volver al color anterior
 
 
@@ -226,8 +227,20 @@ public class Square : MonoBehaviour
             //Attack
             else if ((int)GetComponent<Square>().State != (int)MatchController.Instance.Turn)
             {
-                Debug.Log("Ataco");
+                int currentAttackerWorkers = BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker;
+                int currentAttackerSoldiers = BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier;
+                int currentDefenderWorkers = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
+                int currentDefenderSoldiers = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier;
 
+
+                Debug.Log("Ataco");
+                (int remainingAtackerWorkers, int remainingAttackerSoldiers, int remainingDefenderWorkers, int remainingDefenderSoldiers) = battleResolver.ResolveBattle(currentAttackerWorkers, currentAttackerSoldiers, currentDefenderWorkers, currentDefenderSoldiers);
+                remainingAtackerWorkers = BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker;
+
+                BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker = remainingAtackerWorkers;
+                BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier = remainingAttackerSoldiers;
+                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker = remainingDefenderWorkers;
+                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier = remainingDefenderSoldiers;
                 //BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker  = Quantity of defenders Workers
                 //BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier  = Quantity of defenders Soldier
 
