@@ -19,8 +19,8 @@ public class CamerasController : MonoBehaviour
     private bool isTopDownActive = false;
     private bool zoomingToTopDown = false;
 
-    private float lastTapTime = 0f;
-    private float doubleTapThreshold = 0.3f;
+    //private float lastTapTime = 0f;
+    //private float doubleTapThreshold = 0.3f;
 
     private float currentZoom;
 
