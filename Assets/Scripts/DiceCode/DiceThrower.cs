@@ -84,6 +84,43 @@ public class DiceThrower : MonoBehaviour
         int swords = roll.swords;
         int shields = roll.shields;
 
+
+        if (isAttacker)
+        {
+            if (swords > 0 && shields > 0)
+            {
+                swords += soldiers;
+                shields = 0;
+            }
+            else if (swords > 0)
+            {
+                swords += soldiers;
+            }
+            else
+            {
+                shields += soldiers;
+            }
+        }
+        else
+        {
+            if (swords > 0 && shields > 0)
+            {
+                shields += soldiers;
+                swords = 0;
+            }
+            else if (swords > 0)
+            {
+                swords += soldiers;
+            }
+            else
+            {
+                shields += soldiers;
+            }
+        }
+
+
+        /*
+
         // If both swords and shields exist, keep the relevant one
         if (swords > 0 && shields > 0)
         {
@@ -93,6 +130,7 @@ public class DiceThrower : MonoBehaviour
                 swords = 0; // Defenders only use shields
         }
 
+        
         // Apply soldier bonus
         swords += soldiers;
         shields += soldiers;
@@ -119,7 +157,7 @@ public class DiceThrower : MonoBehaviour
         {
             shields += soldiers;
         }
-
+        */
 
         return new DiceFace
         {

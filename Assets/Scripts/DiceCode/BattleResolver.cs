@@ -14,6 +14,8 @@ public class BattleResolver : MonoBehaviour
         Debug.Log($"Battle outcome: Attacker lost {attackerLosses} troops (Workers: {attackerWorkers - finalAttackerWorkers}, Soldiers: {attackerSoldiers - finalAttackerSoldiers}), " +
                   $"Defender lost {defenderLosses} troops (Workers: {defenderWorkers - finalDefenderWorkers}, Soldiers: {defenderSoldiers - finalDefenderSoldiers}).");
 
+        Debug.Log("\n \n \n");
+
         return (finalAttackerWorkers, finalAttackerSoldiers, finalDefenderWorkers, finalDefenderSoldiers);
     }
 
