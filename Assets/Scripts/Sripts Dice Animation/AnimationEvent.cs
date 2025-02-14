@@ -10,14 +10,14 @@ public class AnimationEvent : MonoBehaviour
     {
         
         Debug.Log("Acaba animacion");
-        CombatScene.SetActive(false);
+        
         StartCoroutine(DelayActions());
     }
     private IEnumerator DelayActions()
     {
-        // Esperamos 2 segundos
-        yield return new WaitForSeconds(2f);
-      
+        //1.5s delay
+        yield return new WaitForSeconds(1.5f);
+        CombatScene.SetActive(false);
         RawCombatScene.SetActive(false);
     }
 }

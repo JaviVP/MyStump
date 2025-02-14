@@ -7,7 +7,6 @@ using Unity.VisualScripting;
 
 public class Square : MonoBehaviour
 {
-    
     private int id;
     private GameObject squareObject;
     private List<Square> squareAdjacents;
@@ -260,10 +259,11 @@ public class Square : MonoBehaviour
                 (int remainingAtackerWorkers, int remainingAttackerSoldiers, int remainingDefenderWorkers, int remainingDefenderSoldiers) = battleResolver.ResolveBattle(currentAttackerWorkers, currentAttackerSoldiers, currentDefenderWorkers, currentDefenderSoldiers);
                 remainingAtackerWorkers = BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker;
 
-                
-                
-                
 
+
+
+                // Activamos combate UI
+                MatchController.Instance.ActivateCombat();
 
                 BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker = remainingAtackerWorkers;
                 BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier = remainingAttackerSoldiers;
