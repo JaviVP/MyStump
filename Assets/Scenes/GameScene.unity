@@ -1605,58 +1605,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 1341def1465b9ee42ab1a58327fc3676, type: 3}
---- !u!1 &113959094
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 113959095}
-  - component: {fileID: 113959096}
-  m_Layer: 0
-  m_Name: Acumulador (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &113959095
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113959094}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -178.94362, y: 47.40681, z: 66.05539}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1835456226}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &113959096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113959094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b30803f67045d8a4289bbb2981e2ba40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pushD1: {x: -11, y: 4, z: 0}
-  pushD2: {x: 11, y: 4, z: 0}
-  torqueD1: {x: 3, y: 5, z: 10}
-  torqueD2: {x: -3, y: -5, z: -10}
-  dice1: {fileID: 1629349424}
-  dice2: {fileID: 588541530}
-  minDelay: 0.05
-  maxDelay: 0.3
 --- !u!1001 &154964611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11827,8 +11775,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dice: {fileID: 588541532}
+<<<<<<< Updated upstream
   CombatScene: {fileID: 0}
   RawCombatScene: {fileID: 0}
+=======
+  CombatScene: {fileID: 1835456225}
+  RawCombatScene: {fileID: 1887950654}
+>>>>>>> Stashed changes
 --- !u!1 &980012373
 GameObject:
   m_ObjectHideFlags: 0
@@ -11842,6 +11795,8 @@ GameObject:
   - component: {fileID: 980012374}
   - component: {fileID: 980012377}
   - component: {fileID: 980012378}
+  - component: {fileID: 980012379}
+  - component: {fileID: 980012380}
   m_Layer: 0
   m_Name: Acumulador
   m_TagString: Untagged
@@ -11877,8 +11832,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d62f9d2eda57a4180466719fd7776f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   RawCommbatScene: {fileID: 0}
   CombatScene: {fileID: 0}
+=======
+  rawCommbatScene: {fileID: 1887950654}
+  combatScene: {fileID: 1835456225}
+>>>>>>> Stashed changes
 --- !u!4 &980012376
 Transform:
   m_ObjectHideFlags: 0
@@ -11968,6 +11928,42 @@ MonoBehaviour:
       shields: 3
     - swords: 3
       shields: 3
+--- !u!114 &980012379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980012373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30803f67045d8a4289bbb2981e2ba40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushD1: {x: -11, y: 4, z: 0}
+  pushD2: {x: 11, y: 4, z: 0}
+  torqueD1: {x: 3, y: 5, z: 10}
+  torqueD2: {x: -3, y: -5, z: -10}
+  dice1: {fileID: 1629349424}
+  dice2: {fileID: 588541530}
+  stampide: {fileID: 1538757224}
+  minDelay: 0.05
+  maxDelay: 0.3
+--- !u!114 &980012380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980012373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64170f146cb53a24ca4da8b37422ae74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stampide: {fileID: 1538757224}
+  dice1: {fileID: 1629349424}
+  dice2: {fileID: 588541530}
 --- !u!1001 &983983576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18036,7 +18032,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 126
   m_CollisionDetection: 2
 --- !u!65 &1538757226
 BoxCollider:
@@ -21176,7 +21172,6 @@ Transform:
   - {fileID: 1788491986}
   - {fileID: 761954947}
   - {fileID: 789303120}
-  - {fileID: 113959095}
   - {fileID: 979035479}
   - {fileID: 1538757227}
   - {fileID: 588541531}
