@@ -51,6 +51,7 @@ public class DiceMeshController : MonoBehaviour
                 AttackerMeshChanger();
                 DefenderMeshChanger();
                 Debug.Log("Movimiento finalizado");
+
             }
         }
      
