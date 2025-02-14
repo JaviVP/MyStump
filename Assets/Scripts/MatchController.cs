@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MatchController : MonoBehaviour
 {
-    [SerializeField] private GameObject rawCommbatScene;
-    [SerializeField] private GameObject combatScene;
+    [SerializeField] private GameObject RawCommbatScene;
+    [SerializeField] private GameObject CombatScene;
     private int maxSoldiersInGame = 3;
     private int maxSoldiersInSquare = 3;
     private int maxTroopsInSquare = 6;
@@ -114,10 +114,9 @@ public class MatchController : MonoBehaviour
 
     public void ActivateCombat()
     {
-        
-        rawCommbatScene.SetActive(true);
-        combatScene.SetActive(true);
-        
+        RawCommbatScene.SetActive(true);
+        CombatScene.SetActive(true);
+
 
     }
 }

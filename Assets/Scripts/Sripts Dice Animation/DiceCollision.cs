@@ -10,7 +10,6 @@ public class DiceCollision : MonoBehaviour
     [SerializeField] private Vector3 torqueD2;
     [SerializeField] private GameObject dice1;
     [SerializeField] private GameObject dice2;
-    [SerializeField] private GameObject stampide;
     
     [SerializeField] private float minDelay = 0.00f;  
     [SerializeField] private float maxDelay = 0.60f;
@@ -21,7 +20,6 @@ public class DiceCollision : MonoBehaviour
 
     void Start()
     {
-     
         // Asignar un tiempo aleatorio entre minDelay y maxDelay antes de lanzar los dados
         float randomDelay = Random.Range(minDelay, maxDelay);
         Invoke("LaunchDice", randomDelay);
@@ -42,7 +40,7 @@ public class DiceCollision : MonoBehaviour
     void LaunchDice()
     {
         if (hasBeenLaunched) return; // Evita lanzamientos repetidos 
-    
+
         if (rb1 != null && rb2 != null)
         {
             rb1.AddForce(pushD1 * 50);
@@ -53,8 +51,6 @@ public class DiceCollision : MonoBehaviour
         }
 
         hasBeenLaunched = true;
-
-
     }
 
 

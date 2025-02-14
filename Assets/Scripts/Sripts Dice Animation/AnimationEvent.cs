@@ -19,7 +19,5 @@ public class AnimationEvent : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         CombatScene.SetActive(false);
         RawCombatScene.SetActive(false);
-     
-
     }
 }
