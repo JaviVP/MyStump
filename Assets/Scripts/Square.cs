@@ -271,6 +271,18 @@ public class Square : MonoBehaviour
                 BoardController.Instance.MyBoard[this.id].Faction.objectFaction.transform.GetChild(1).gameObject.GetComponent<TMP_Text>().text = "S:" + BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier + " W:" + BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker;
                 BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.objectFaction.transform.GetChild(1).gameObject.GetComponent<TMP_Text>().text = "S:" + BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier + " W:" + BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
 
+                if (BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier+ BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker==0)
+                {
+                    //Destroy defenders
+                    Destroy(BoardController.Instance.MyBoard[this.id].Faction.objectFaction);
+                    BoardController.Instance.MyBoard[this.id].Faction = null;
+
+                }
+                if (BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier + BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker == 0)
+                {
+                    //Destroy attackers
+                }
+
 
                 //BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker  = Quantity of defenders Workers
                 //BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier  = Quantity of defenders Soldier
