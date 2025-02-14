@@ -266,26 +266,6 @@ public class Square : MonoBehaviour
                 BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier = remainingDefenderSoldiers;
 
 
-
-                //BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker  = Quantity of defenders Workers
-                //BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier  = Quantity of defenders Soldier
-
-                //BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier  = Quantity of attack Soldier
-                //BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker  = Quantity of attack Worker
-
-
-                /*Debug.Log(GetComponent<Square>().State.ToString() + "---" + (int)MatchController.Instance.Turn);
-                BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker += BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
-                BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier += BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier;
-                Destroy(BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.objectFaction);
-                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction = null;
-
-                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].state = BoardController.SquareState.Empty;
-                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].squareObject.GetComponent<Square>().state = BoardController.SquareState.Empty;
-                //Moved and deselected
-                BoardController.Instance.SquareSelected = -1;
-                BoardController.Instance.ResetStateSquareColor();
-                BoardController.Instance.MarkFactionsTurn();*/
                 clics = 0;
             }
             else
