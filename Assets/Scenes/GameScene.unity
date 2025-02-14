@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -8390,6 +8391,63 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1188579507}
   m_SourcePrefab: {fileID: 100100000, guid: 1341def1465b9ee42ab1a58327fc3676, type: 3}
+--- !u!1001 &704870937
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2619056601351643651, guid: 8485a6bedfcbbf345bc591dfb629154e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 501.93268
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619056601351643651, guid: 8485a6bedfcbbf345bc591dfb629154e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 246.60959
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619056601351643651, guid: 8485a6bedfcbbf345bc591dfb629154e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 122.37531
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619056601351643651, guid: 8485a6bedfcbbf345bc591dfb629154e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619056601351643651, guid: 8485a6bedfcbbf345bc591dfb629154e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619056601351643651, guid: 8485a6bedfcbbf345bc591dfb629154e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619056601351643651, guid: 8485a6bedfcbbf345bc591dfb629154e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619056601351643651, guid: 8485a6bedfcbbf345bc591dfb629154e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619056601351643651, guid: 8485a6bedfcbbf345bc591dfb629154e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619056601351643651, guid: 8485a6bedfcbbf345bc591dfb629154e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3761050170843406932, guid: 8485a6bedfcbbf345bc591dfb629154e, type: 3}
+      propertyPath: m_Name
+      value: RollDice
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8485a6bedfcbbf345bc591dfb629154e, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -11766,7 +11824,6 @@ GameObject:
   - component: {fileID: 980012375}
   - component: {fileID: 980012374}
   - component: {fileID: 980012377}
-  - component: {fileID: 980012379}
   - component: {fileID: 980012378}
   m_Layer: 0
   m_Name: Acumulador
@@ -11846,21 +11903,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 980012373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e55e629bda68464196d2ab7e52e489a, type: 3}
+  m_Script: {fileID: 11500000, guid: a6090069405fac04983780101c60f7ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &980012379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980012373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea7be8333fea716409e5e2d9c743a9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  availableDice:
+  - name: Dado 1
+    faces:
+    - swords: 1
+      shields: 0
+    - swords: 1
+      shields: 0
+    - swords: 0
+      shields: 0
+    - swords: 0
+      shields: 0
+    - swords: 0
+      shields: 1
+    - swords: 0
+      shields: 1
+  - name: Dado 2
+    faces:
+    - swords: 0
+      shields: 1
+    - swords: 0
+      shields: 1
+    - swords: 0
+      shields: 0
+    - swords: 1
+      shields: 0
+    - swords: 1
+      shields: 0
+    - swords: 2
+      shields: 2
+  - name: Dado 3
+    faces:
+    - swords: 1
+      shields: 0
+    - swords: 1
+      shields: 0
+    - swords: 2
+      shields: 0
+    - swords: 0
+      shields: 1
+    - swords: 3
+      shields: 3
+    - swords: 3
+      shields: 3
 --- !u!1001 &983983576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24726,3 +24814,4 @@ SceneRoots:
   - {fileID: 414406755}
   - {fileID: 839511178}
   - {fileID: 1835456226}
+  - {fileID: 704870937}
