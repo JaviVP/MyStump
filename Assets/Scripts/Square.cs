@@ -236,8 +236,9 @@ public class Square : MonoBehaviour
                     BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].state = BoardController.SquareState.Empty;
                     BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].squareObject.GetComponent<Square>().state = BoardController.SquareState.Empty;
                     //Moved and deselected
-                    BoardController.Instance.SquareSelected = -6;
+                    
                 }
+                BoardController.Instance.SquareSelected = -1;
                 BoardController.Instance.ResetStateSquareColor();
                 BoardController.Instance.MarkFactionsTurn();
 
@@ -246,6 +247,8 @@ public class Square : MonoBehaviour
             //Attack
             else if ((int)GetComponent<Square>().State != (int)MatchController.Instance.Turn)
             {
+
+
                 int currentAttackerWorkers = BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker;
                 int currentAttackerSoldiers = BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier;
                 int currentDefenderWorkers = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
@@ -261,6 +264,9 @@ public class Square : MonoBehaviour
                 BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier = remainingAttackerSoldiers;
                 BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker = remainingDefenderWorkers;
                 BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier = remainingDefenderSoldiers;
+
+
+
                 //BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker  = Quantity of defenders Workers
                 //BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier  = Quantity of defenders Soldier
 
