@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine.UIElements;
 using TMPro;
+using Unity.VisualScripting;
 
 public class Square : MonoBehaviour
 {
@@ -217,17 +218,29 @@ public class Square : MonoBehaviour
 
                 //Error: check max soldiers =2, max workes= 4  (max sum=4)
 
-                BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker += BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
-                BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier += BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier;
-                Destroy(BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.objectFaction);
-                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction = null;
+                int qw1 = BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker;
+                int qw2 = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
+                int qs1= BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier;
+                int qs2 = BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier;
 
-                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].state = BoardController.SquareState.Empty;
-                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].squareObject.GetComponent<Square>().state = BoardController.SquareState.Empty;
-                //Moved and deselected
-                BoardController.Instance.SquareSelected = -6;
+                int sum = qw1 + qw2 + qs1 + qs2;
+
+
+                if (sum <= 4)
+                {
+                    BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker += BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
+                    BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier += BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier;
+                    Destroy(BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.objectFaction);
+                    BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction = null;
+
+                    BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].state = BoardController.SquareState.Empty;
+                    BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].squareObject.GetComponent<Square>().state = BoardController.SquareState.Empty;
+                    //Moved and deselected
+                    BoardController.Instance.SquareSelected = -6;
+                }
                 BoardController.Instance.ResetStateSquareColor();
                 BoardController.Instance.MarkFactionsTurn();
+
                 clics = 0;
             }
             //Attack
