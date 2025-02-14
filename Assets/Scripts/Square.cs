@@ -260,10 +260,15 @@ public class Square : MonoBehaviour
                 (int remainingAtackerWorkers, int remainingAttackerSoldiers, int remainingDefenderWorkers, int remainingDefenderSoldiers) = battleResolver.ResolveBattle(currentAttackerWorkers, currentAttackerSoldiers, currentDefenderWorkers, currentDefenderSoldiers);
                 remainingAtackerWorkers = BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker;
 
-                BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker = remainingAtackerWorkers;
-                BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier = remainingAttackerSoldiers;
-                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker = remainingDefenderWorkers;
-                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier = remainingDefenderSoldiers;
+                
+                
+                
+
+
+                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker = remainingAtackerWorkers;
+                BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier = remainingAttackerSoldiers;
+                BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker = remainingDefenderWorkers;
+                BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier = remainingDefenderSoldiers;
 
 
 
@@ -272,20 +277,28 @@ public class Square : MonoBehaviour
                 BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.objectFaction.transform.GetChild(1).gameObject.GetComponent<TMP_Text>().text = "S:" + BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier + " W:" + BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker;
 
                 //
-                if (BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier+ BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker==0)
+                if (BoardController.Instance.MyBoard[this.id].Faction.QuantitySoldier + BoardController.Instance.MyBoard[this.id].Faction.QuantityWorker <= 0)
                 {
                     //Destroy defenders
                     Destroy(BoardController.Instance.MyBoard[this.id].Faction.objectFaction);
                     BoardController.Instance.MyBoard[this.id].Faction = null;
+                    BoardController.Instance.MyBoard[this.id].state = BoardController.SquareState.Empty;
+                    BoardController.Instance.MyBoard[this.id].squareObject.GetComponent<Square>().state = BoardController.SquareState.Empty;
 
                 }
-                if (BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier + BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker == 0)
+                if (BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantitySoldier + BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.QuantityWorker <= 0)
                 {
                     //Destroy attackers
+                    Destroy(BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction.objectFaction);
+                    BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].Faction = null;
+                    BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].state = BoardController.SquareState.Empty;
+                    BoardController.Instance.MyBoard[BoardController.Instance.SquareSelected].squareObject.GetComponent<Square>().state = BoardController.SquareState.Empty;
                 }
 
+                BoardController.Instance.ResetStateSquareColor();
+                BoardController.Instance.MarkFactionsTurn();
+                BoardController.Instance.SquareSelected = -1;
 
-                
                 clics = 0;
             }
             else
