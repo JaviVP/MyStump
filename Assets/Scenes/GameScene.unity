@@ -824,7 +824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93325f9a09a98e4bb892cdaeb103813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 2
+  state: 4
 --- !u!64 &44119946
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1141,7 +1141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93325f9a09a98e4bb892cdaeb103813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 2
+  state: 3
 --- !u!64 &61173279
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3980,6 +3980,7 @@ MonoBehaviour:
   - {r: 1, g: 0.04082808, b: 0, a: 0}
   - {r: 0.49497414, g: 1, b: 0, a: 0}
   - {r: 0.8018868, g: 0.29657, b: 0.10969208, a: 0}
+  - {r: 0.41509432, g: 0.21223183, b: 0.029369876, a: 0}
   - {r: 0.5471698, g: 0.5152594, b: 0.503293, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
   orderSquare: {fileID: 654734910}
@@ -11826,6 +11827,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dice: {fileID: 588541532}
+  CombatScene: {fileID: 0}
+  RawCombatScene: {fileID: 0}
 --- !u!1 &980012373
 GameObject:
   m_ObjectHideFlags: 0
@@ -11874,6 +11877,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d62f9d2eda57a4180466719fd7776f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RawCommbatScene: {fileID: 0}
+  CombatScene: {fileID: 0}
 --- !u!4 &980012376
 Transform:
   m_ObjectHideFlags: 0
@@ -12975,7 +12980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93325f9a09a98e4bb892cdaeb103813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 2
+  state: 3
 --- !u!64 &1124895928
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15069,7 +15074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93325f9a09a98e4bb892cdaeb103813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 2
+  state: 4
 --- !u!64 &1297715006
 MeshCollider:
   m_ObjectHideFlags: 0

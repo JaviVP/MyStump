@@ -56,10 +56,11 @@ public class SquareAdjacents : MonoBehaviour
                 {
                     obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Termite];
                 }
-                else if (obj.GetComponent<Square>().State == BoardController.SquareState.Wood)
+                else if (obj.GetComponent<Square>().State == BoardController.SquareState.WoodFull)
                 {
-                    obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Wood];
+                    obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.WoodFull];
                 }
+
                 else if (obj.GetComponent<Square>().State == BoardController.SquareState.TermiteWall)
                 {
                     obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.TermiteWall];

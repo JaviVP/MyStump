@@ -64,9 +64,13 @@ public class Square : MonoBehaviour
         {
             obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Termite];
         }
-        else if (obj.GetComponent<Square>().State == BoardController.SquareState.Wood)
+        else if (obj.GetComponent<Square>().State == BoardController.SquareState.WoodFull)
         {
-            obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Wood];
+            obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.WoodFull];
+        }
+        else if (obj.GetComponent<Square>().State == BoardController.SquareState.WoodEmpty)
+        {
+            obj.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.WoodEmpty];
         }
         else if (obj.GetComponent<Square>().State == BoardController.SquareState.TermiteWall)
         {
@@ -165,7 +169,7 @@ public class Square : MonoBehaviour
         {
           
             //Moving
-            if (GetComponent<Square>().State == BoardController.SquareState.Empty)
+            if (GetComponent<Square>().State == BoardController.SquareState.Empty || GetComponent<Square>().State == BoardController.SquareState.WoodFull || GetComponent<Square>().State == BoardController.SquareState.WoodEmpty)
             {
 
               //  Debug.Log("Moving a empty square SELECTED: "+ BoardController.Instance.SquareSelected);

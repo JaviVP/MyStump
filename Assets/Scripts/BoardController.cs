@@ -268,10 +268,15 @@ public class BoardController : MonoBehaviour
                 MyBoard[i].SquareObject.GetComponent<MeshCollider>().enabled = false;
                 MyBoard[i].SquareObject.GetComponent<MeshRenderer>().enabled = false;
             }
-            else if (MyBoard[i].State == BoardController.SquareState.Wood)
+            else if (MyBoard[i].State == BoardController.SquareState.WoodFull)
             {
 
-                MyBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.Wood]; ;
+                MyBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.WoodFull]; ;
+            }
+            else if (MyBoard[i].State == BoardController.SquareState.WoodEmpty)
+            {
+
+                MyBoard[i].SquareObject.GetComponent<MeshRenderer>().material.color = BoardController.Instance.StatesColor[(int)BoardController.SquareState.WoodEmpty]; ;
             }
             else if (MyBoard[i].State == BoardController.SquareState.TermiteWall)
             {
