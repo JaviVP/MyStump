@@ -4,6 +4,9 @@ public class MatchController : MonoBehaviour
 {
     [SerializeField] private GameObject rawCommbatScene;
     [SerializeField] private GameObject combatScene;
+    [SerializeField] private GameObject dicesAnim;
+    [SerializeField] private GameObject fxCollision1;
+    [SerializeField] private GameObject fxCollision2;
     private int maxSoldiersInGame = 3;
     private int maxSoldiersInSquare = 3;
     private int maxTroopsInSquare = 6;
@@ -114,10 +117,13 @@ public class MatchController : MonoBehaviour
 
     public void ActivateCombat()
     {
-        
+        DiceCollision.Instance.LaunchDicesDelay();
         rawCommbatScene.SetActive(true);
         combatScene.SetActive(true);
-        
+        dicesAnim.SetActive(false);
+        fxCollision1.SetActive(false);
+        fxCollision2.SetActive(false);
 
     }
+
 }

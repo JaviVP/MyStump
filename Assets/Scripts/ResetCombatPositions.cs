@@ -5,36 +5,76 @@ public class ResetCombatPositions : MonoBehaviour
     [SerializeField] private GameObject stampide;
     [SerializeField] private GameObject dice1;
     [SerializeField] private GameObject dice2;
+    [SerializeField] private float stampideTime = 3.7f;
 
     private Vector3 stampidePosIni;
     private Vector3 dice1PosIni;
     private Vector3 dice2PosIni;
 
-    private void Start()
-    {
-        // Guardamos las posiciones iniciales de los objetos al inicio
-        if (stampide != null) stampidePosIni = stampide.transform.localPosition;
-        if (dice1 != null) dice1PosIni = dice1.transform.localPosition;
-        if (dice2 != null) dice2PosIni = dice2.transform.localPosition;
+    private Quaternion stampideRotIni;
+    private Quaternion dice1RotIni;
+    private Quaternion dice2RotIni;
 
-        // Para ver en la consola las posiciones iniciales
-        Debug.Log("Posición inicial objeto 1 (stampide): " + stampidePosIni);
-        Debug.Log("Posición inicial objeto 2 (dice1): " + dice1PosIni);
-        Debug.Log("Posición inicial objeto 3 (dice2): " + dice2PosIni);
+    public static ResetCombatPositions Instance { get; private set; }
+
+    private void Awake()
+    {
+        SaveInitialTransform();
+
+        // If there is an instance, and it's not me, delete myself.
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
-    // Función para resetear las posiciones locales de los objetos a su estado inicial
-    public void ResetPositions()
+    private void SaveInitialTransform()
     {
         if (stampide != null)
-            stampide.transform.localPosition = stampidePosIni;
+        {
+            stampidePosIni = stampide.transform.localPosition;
+            stampideRotIni = stampide.transform.localRotation;
+        }
         if (dice1 != null)
-            dice1.transform.localPosition = dice1PosIni;
+        {
+            dice1PosIni = dice1.transform.localPosition;
+            dice1RotIni = dice1.transform.localRotation;
+        }
         if (dice2 != null)
-            dice2.transform.localPosition = dice2PosIni;
+        {
+            dice2PosIni = dice2.transform.localPosition;
+            dice2RotIni = dice2.transform.localRotation;
+        }
+    }
 
-        // Mostrar un mensaje en la consola cuando se reseteen las posiciones
-        Debug.Log("Posiciones reseteadas.");
+    public void ResetTransform()
+    {
+        if (stampide != null)
+        {
+            stampide.transform.localPosition = stampidePosIni;
+            stampide.transform.localRotation = stampideRotIni;
+        }
+        if (dice1 != null)
+        {
+            dice1.transform.localPosition = dice1PosIni;
+            dice1.transform.localRotation = dice1RotIni;
+        }
+        if (dice2 != null)
+        {
+            dice2.transform.localPosition = dice2PosIni;
+            dice2.transform.localRotation = dice2RotIni;
+        }
+
+        Debug.Log("Posiciones y rotaciones reseteadas.");
+    }
+
+    public float StampideTime()
+    {
+        return stampideTime;
     }
 }
 

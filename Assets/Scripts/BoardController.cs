@@ -306,9 +306,15 @@ public class BoardController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        
+        if (CamerasController.Instance.IsTopDownActive())
+        {
 
-        UnSelected();
+            UnSelected();
+        }
+        else
+        {
+
+        }
     }
 
 

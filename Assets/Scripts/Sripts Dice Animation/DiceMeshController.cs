@@ -4,11 +4,9 @@ public class DiceMeshController : MonoBehaviour
 {
     [SerializeField] private GameObject antStampide;
     [SerializeField] private float velocity;
-    [SerializeField] private float stampideTime;
     [SerializeField] private GameObject dadosFinal;
     [SerializeField] private GameObject dadosI;
     [SerializeField] private GameObject dadosD;
-    private Vector3 stampidePos;
     private float tiempoRestante;
     private float stampideTimeLeft;
 
@@ -18,7 +16,7 @@ public class DiceMeshController : MonoBehaviour
 
     private void Start()
     {
-        stampideTimeLeft = stampideTime;
+        stampideTimeLeft = ResetCombatPositions.Instance.StampideTime();
         Debug.Log("ejecuto hormiga");
         animator = dadosFinal.GetComponent<Animator>();
     }
@@ -52,22 +50,16 @@ public class DiceMeshController : MonoBehaviour
                 DefenderMeshChanger();
                 Debug.Log("Movimiento finalizado");
 
+
             }
-        }else
+
+        }
+        else 
         {
-
-
-
+            stampideTimeLeft = ResetCombatPositions.Instance.StampideTime();
         }
      
     }
-
-    public void UpdateStampide()
-    {
-        
-
-    }
-
     private void ActivateAnimation()
     {
         animator.SetTrigger("FinalizarMovimiento"); // "FinalizarMovimiento" es el nombre del Trigger en el Animator

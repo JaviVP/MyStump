@@ -16,7 +16,7 @@ public class CamerasController : MonoBehaviour
     private CinemachineCamera activeCamera;
     private CinemachineCamera lastUsedCamera;
 
-    private bool isTopDownActive = false;
+    [SerializeField] private bool isTopDownActive = false;
     private bool zoomingToTopDown = false;
 
     //private float lastTapTime = 0f;
@@ -192,6 +192,11 @@ public class CamerasController : MonoBehaviour
     public CinemachineCamera GetActiveCamera()
     {
         return activeCamera;
+    }
+
+    public bool IsTopDownActive()
+    {
+        return isTopDownActive;
     }
 
 }

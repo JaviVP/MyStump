@@ -332,9 +332,14 @@ public class Square : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (CamerasController.Instance.IsTopDownActive())
+        {
+            HighlightSquare();
+        }
+        else
+        {
 
-        HighlightSquare();
-
+        }
     }
 
     // Update is called once per frame

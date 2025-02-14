@@ -12,36 +12,51 @@ public class DiceCollision : MonoBehaviour
     [SerializeField] private GameObject dice2;
     [SerializeField] private GameObject stampide;
     
-    [SerializeField] private float minDelay = 0.00f;  
-    [SerializeField] private float maxDelay = 0.60f;
+    [SerializeField] private float minDelay;  
+    [SerializeField] private float maxDelay;
 
     private Rigidbody rb1;
     private Rigidbody rb2;
-    private bool hasBeenLaunched = false; // Para evitar múltiples lanzamientos
+   // Para evitar múltiples lanzamientos
+    private float randomDelay;
 
-    void Start()
+    public static DiceCollision Instance { get; private set; }
+    private void Awake()
     {
-     
+        // If there is an instance, and it's not me, delete myself.
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+    public void Start()
+    {
+        randomDelay = Random.Range(minDelay, maxDelay);
         // Asignar un tiempo aleatorio entre minDelay y maxDelay antes de lanzar los dados
-        float randomDelay = Random.Range(minDelay, maxDelay);
-        Invoke("LaunchDice", randomDelay);
+        //Invoke("LaunchDice", randomDelay);
         rb1 = dice1.GetComponent<Rigidbody>();
         rb2 = dice2.GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.R))
         {
             Debug.Log("Reset");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-        }
+        }*/
     }
    
-    void LaunchDice()
+    public void LaunchDice()
     {
-        if (hasBeenLaunched) return; // Evita lanzamientos repetidos 
+        
     
         if (rb1 != null && rb2 != null)
         {
@@ -52,10 +67,15 @@ public class DiceCollision : MonoBehaviour
             rb2.AddTorque(torqueD2);
         }
 
-        hasBeenLaunched = true;
+        
 
 
     }
-
+    
+    public void LaunchDicesDelay()
+    {
+        randomDelay = Random.Range(minDelay, maxDelay);
+        Invoke("LaunchDice", randomDelay);
+    }
 
 }
