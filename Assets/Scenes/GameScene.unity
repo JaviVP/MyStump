@@ -9122,7 +9122,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: c20870be15c292041b66b5b29daace3c, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -11766,6 +11766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 979035479}
   - component: {fileID: 979035478}
+  - component: {fileID: 979035480}
   m_Layer: 0
   m_Name: Dices
   m_TagString: Untagged
@@ -11812,6 +11813,19 @@ Transform:
   - {fileID: 758526065}
   m_Father: {fileID: 1835456226}
   m_LocalEulerAnglesHint: {x: 46.393, y: 0, z: 0}
+--- !u!114 &979035480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979035477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12106bd14ea8b5439278525b89c8504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dice: {fileID: 588541532}
 --- !u!1 &980012373
 GameObject:
   m_ObjectHideFlags: 0
@@ -21632,7 +21646,7 @@ GameObject:
   - component: {fileID: 1887950657}
   - component: {fileID: 1887950656}
   m_Layer: 5
-  m_Name: CombatScene
+  m_Name: CombatRawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21677,7 +21691,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 8400000, guid: c20870be15c292041b66b5b29daace3c, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
