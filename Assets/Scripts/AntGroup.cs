@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class AntGroup : FactionAbstract
 {
-
-
-
     public override void Attack()
     {
         throw new System.NotImplementedException();

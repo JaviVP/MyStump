@@ -26,7 +26,8 @@ public class BoardController : MonoBehaviour
         Termite,
         Ant,
         Empty,
-        Wood,
+        WoodFull,
+        WoodEmpty,
         TermiteWall,
         AntHill,
         NoWakable
